@@ -105,7 +105,9 @@
 </head>
 <body>
 <div>
-    <div style="margin: 6px 0px; color: #A22E00;font: italic bold 12px arial, sans-serif;"><%=Calendar.getInstance().getTime()%>
+    <div style="margin: 6px 0px; color: #A22E00;font: italic bold 12px arial, sans-serif;">
+        <%=Calendar.getInstance().getTime()%>
+        16
     </div>
     <hr style="margin: 0px;padding:0px;"/>
     <listing style="margin: 0px;color: #00008B;font-size: 11px;"
