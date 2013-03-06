@@ -5,7 +5,6 @@
 <%@ page import="java.util.concurrent.TimeoutException" %>
 <%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.net.URLDecoder" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -118,7 +117,7 @@
             InputStreamReader reader = null;
             BufferedReader bufferedReader = null;
             try {
-                reader = new InputStreamReader(stream);
+                reader = new InputStreamReader(stream, "GBK");
                 bufferedReader = new BufferedReader(reader);
 
                 int readLint = 0;
@@ -328,7 +327,7 @@
 <body>
 <div>
     <div class="layout-top">
-        <form action="diagnose.jsp" method="post" accept-charset="GBK">
+        <form action="diagnose.jsp" method="post">
             <input class="field" id="params" name="params" type="text" tabindex="1"
                    style="width: 500px;font: italic 14px arial, sans-serif;color: #A22E00;margin: 2px 6px;height: 25px;"
                    value="<%= null != request.getAttribute("params") ? request.getAttribute("params") : "" %>"/>
