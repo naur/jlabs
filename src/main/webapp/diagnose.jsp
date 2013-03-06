@@ -5,6 +5,7 @@
 <%@ page import="java.util.concurrent.TimeoutException" %>
 <%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.net.URLDecoder" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -117,7 +118,7 @@
             InputStreamReader reader = null;
             BufferedReader bufferedReader = null;
             try {
-                reader = new InputStreamReader(stream, "GBK");
+                reader = new InputStreamReader(stream);
                 bufferedReader = new BufferedReader(reader);
 
                 int readLint = 0;
@@ -233,8 +234,6 @@
             response.reset();
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html");
-            request.setAttribute("params", params);
-            request.setAttribute("line", line);
             response.addCookie(new Cookie("params", URLEncoder.encode(params, "UTF-8").trim().replaceAll("\\+", "%20")));
             response.addCookie(new Cookie("line", String.valueOf(line)));
             response.addCookie(new Cookie("timeout", String.valueOf(timeout)));
@@ -244,7 +243,6 @@
             else result += ex.getMessage();
         }
     }
-    request.setAttribute("content", result);
 %>
 
 <title> Diagnose </title>
@@ -327,13 +325,13 @@
 <body>
 <div>
     <div class="layout-top">
-        <form action="diagnose.jsp" method="post">
+        <form method="post">
             <input class="field" id="params" name="params" type="text" tabindex="1"
                    style="width: 500px;font: italic 14px arial, sans-serif;color: #A22E00;margin: 2px 6px;height: 25px;"
-                   value="<%= null != request.getAttribute("params") ? request.getAttribute("params") : "" %>"/>
+                   value="<%= null != request.getParameter("params") ? request.getParameter("params") : "" %>"/>
             <input class="field" id="line" name="line" type="text" tabindex="2"
                    style="width: 80px;font: italic 14px 'Comic Sans MS';color: #A22E00;margin: 2px 6px;height: 25px;"
-                   value="<%= null != request.getAttribute("line") ? request.getAttribute("line") : defaultLine %>"/>
+                   value="<%= null != request.getParameter("line") ? request.getParameter("line") : defaultLine %>"/>
 
             <select class="field" id="timeout" name="timeout"
                     style="font: italic 14px 'Comic Sans MS';color: #A22E00;margin: 2px 6px;height: 25px;width: 80px;">
@@ -351,8 +349,7 @@
     <hr style="margin: 0px;padding:0px;"/>
     <div style="margin: 6px 0px; color: #A22E00;font: italic bold 12px arial, sans-serif;"><%=Calendar.getInstance().getTime()%>
     </div>
-    <listing style="margin: 0px;color: #00008B;font-size: 11px;"
-             class="layout-content"><%=request.getAttribute("content")%>
+    <listing style="margin: 0px;color: #00008B;font-size: 11px;" class="layout-content"><%=result%>
     </listing>
 </div>
 
