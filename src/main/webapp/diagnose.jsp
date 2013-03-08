@@ -209,6 +209,8 @@
 
 <%
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+    String reqCode = request.getCharacterEncoding();
+    request.setCharacterEncoding("UTF-8");
     String params = request.getParameter("params");
     int line = null != request.getParameter("line") ? Integer.parseInt(request.getParameter("line")) : defaultLine;
     long timeout = null != request.getParameter("timeout") ? Long.parseLong(request.getParameter("timeout")) : defaultTimeout;
@@ -347,7 +349,8 @@
         </form>
     </div>
     <hr style="margin: 0px;padding:0px;"/>
-    <div style="margin: 6px 0px; color: #A22E00;font: italic bold 12px arial, sans-serif;"><%=Calendar.getInstance().getTime()%>
+    <div style="margin: 6px 0px; color: #A22E00;font: italic bold 12px arial, sans-serif;"><%=Calendar.getInstance().getTime()%> -
+        <%=reqCode%>
     </div>
     <listing style="margin: 0px;color: #00008B;font-size: 11px;" class="layout-content"><%=result%>
     </listing>
