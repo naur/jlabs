@@ -1,0 +1,99 @@
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    <style type="text/css">
+        a {
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .selected {
+            color: red;
+        }
+    </style>
+    <script type="text/javascript">
+        var dom = {
+            paging: '#paging'
+        };
+
+        var pagenavi = (function (option) {
+            var navigate = function (options) {
+                var opt = $.extend({
+                    total: 100,
+                    size: 20,
+                    index: 1,
+                    region: 5,
+                    prev: 'Prev',
+                    next: 'Next',
+                    container: null,
+                    startPrefix: [1, '...'],
+                    endPrefix: ['...'],
+                    handler: null
+                }, options);
+
+                opt.pages = Math.ceil(opt.total / opt.size);
+                if (opt.index > opt.pages) opt.index = opt.pages;
+                opt.endPrefix[1] = opt.pages;
+                var currRegion = Math.ceil(opt.region / -2) + opt.index;
+
+                var buffer = [];
+                for (var i = 0; i < opt.region; i++, currRegion++) {
+                    if (currRegion >= 1 && currRegion <= opt.pages) {
+                        buffer.push(currRegion);
+                    }
+                }
+
+                buffer = opt.startPrefix.slice(0, buffer[0] - 1).concat(buffer);
+                if (buffer[buffer.length - 1] != opt.pages)
+                    buffer = buffer.concat(opt.endPrefix.slice(buffer[buffer.length - 1] - opt.pages));
+
+                if (1 != opt.index) buffer.unshift(opt.prev);
+                if (opt.pages != opt.index) buffer.push(opt.next);
+
+                var str = '';
+                for (var i in buffer) {
+                    if (opt.index == buffer[i])
+                        str += '<a class="selected">' + buffer[i] + '</a>'
+                    else
+                        str += '<a>' + buffer[i] + '</a>'
+                }
+                if (opt.container) $(opt.container).html(str);
+
+                var salf = this;
+                $(opt.container + ' a').die().live('click', function () {
+                    var currIndex = $(this).text();
+                    if (currIndex == opt.index || currIndex == '...') return;
+                    if (currIndex == opt.prev) currIndex = opt.index - 1;
+                    if (currIndex == opt.next) currIndex = opt.index + 1;
+                    currIndex = parseInt(currIndex);
+                    if (!currIndex) return;
+                    window.console.log(currIndex + '\t' + opt.index);
+                    navigate($.extend({}, opt, {
+                        index: currIndex
+                    }));
+                    if (opt.handler) opt.handler({index: currIndex, size: opt.size});
+                    return false;
+                });
+            };
+
+            return navigate;
+        })();
+
+        $(function () {
+            pagenavi({
+                container: dom.paging,
+                total: 1,
+                index: 5,
+                handler: function (opt) {
+                    //alert(JSON.stringify(opt));
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<ul>
+    <li id="paging"></li>
+</ul>
+</body>
+</html>
