@@ -1,4 +1,6 @@
-﻿BaseDeliveryCenter	33
+﻿sendpay30位打标
+
+BaseDeliveryCenter	33
     DeliveryCenterId	DeliveryCenterName	Status	CreateTime	UpdateTime
     -1	武汉奓山分拣中心	1	2013-02-06 17:35:01.907	2013-03-13 12:00:01.650
     0	北京双树分拣中心23	1	2013-01-06 14:23:13.817	2013-02-06 15:46:00.913
@@ -67,6 +69,31 @@ ________________________________________________________________________________
 		agingMap.put(5, "晚间配送211");
 		agingMap.put(6, "晚间配送非211");
 ____________________________________________________________________________________________________________________
+OrderTransfer --> 匹配波次 -->
+                  1:特殊波次 
+			key: "bs_" + sendPay + "_" + distributionId + "_" + cityId
+			select batchId,AgingId,CityId,CountyId,DeliveryCenterId,Sequence from BaseMonitorBatch (nolock) 
+			 where AgingId = ? and DeliveryCenterId = ? and CityId = ? and isspecified=1 and Status = 1 and AppliedModule = 1
+		  2:普通波次 
+			key: "b_" + sendPay;
+			select batchId,AgingId,CityId,CountyId,DeliveryCenterId,Sequence from BaseMonitorBatch (nolock) 
+			 where AgingId = ? and isspecified=0 and Status = 1 and AppliedModule=1
+		  3:关联波次各个时间点
+			SELECT a.MonitorPointId,a.EndTime,a.OffsetDays,b.MonitorPointName,b.MonitorPointDesc 
+			FROM BaseMonitorBatchPoint as a inner join BaseMonitorPoint as b on b.MonitorPointId = a.MonitorPointId where batchid = :BactchId order by a.MonitorPointId asc
+
+		  4:计算promise
+			4-1: 211 +1天
+			4-2: 311 +1天
+			4-3: 普通自营  
+				如果是自提： select ProvinceId, CityId, CountyId, TownId from BaseSite  where siteid = ? 获取 ProvinceId, CityId, CountyId, TownId
+				然后：select NeedTime,CarrierId,DistributionId,CountyId,StorehouseId from PrmDeliveryStorehouseTime (nolock) 
+					where Status = 1 and CarrierId = ? and DistributionId = ? and CountyId = ? and StorehouseId = ?
+			4-4: 第三方  
+				select NeedTime,CarrierId,DistributionId,CountyId,StorehouseId from PrmDeliveryStorehouseTime (nolock) 
+				where Status = 1 and CarrierId = ? and DistributionId = ? and CountyId = ? and StorehouseId = ?
+____________________________________________________________________________________________________________________
+
 根据配送中心、库房和时效获取缓存中的库房开通配置新
 SELECT delivery_center_id,store_id,sendpay FROM prm_storehouse_show (nolock)
 GROUP BY delivery_center_id,store_id,sendpay
@@ -78,6 +105,7 @@ GROUP BY delivery_center_id,store_id,sendpay
 					storehouseShow.setSendpay(rs.getInt("sendpay"));
 					storehouseShow.setIsShow(rs.getBoolean("is_show"));
 					storehouseShow.setShowStatus(rs.getInt("show_status"));
+______
 public enum EnumShowType {
 	/** 波次计算. */
 	BATCH_CALCULATE(1),
@@ -85,7 +113,7 @@ public enum EnumShowType {
 	SCHEDULE_CALCULATE(2),
     /** 内配计算. */
 	ITMS_CALCULATE(3); 
-
+______
 SELECT TOP 3 * FROM prm_storehouse_show (nolock)
 id	delivery_center_id	store_id	show_type_id	sendpay	is_show	show_status	create_time	update_time	user_name
 
@@ -95,11 +123,72 @@ id	delivery_center_id	store_id	show_type_id	sendpay	is_show	show_status	create_t
 
 3	4	0	1	3	1	1	2012-07-01 00:45:41.05	2013-02-16 00:00:00.0	admin
 
-
+______
 KEYL: store_show_deliveryCenterId_storeId_sendpay
-
+______
 根据四级地址获取缓存里的全网时刻表波次信息
 	int provinceId, int cityId, int countyId, int townId
 根据三级地址(县id默认为0)获取缓存里的全网时刻表波次信息
 	int provinceId, int cityId, int countyId
+__________________________________________________________________________________________________________________
 
+相关表：prm_batch， prm_batch_point
+A:	// 从全网时刻波次表中获取status>0(生效或待定)的四级地址
+		String sql = "select province_id,city_id,county_id,town_id from prm_batch (nolock) " +
+			" group by province_id,city_id,county_id,town_id";
+	id	sendpay	delivery_center_id	carrier_id	pay_type	site_id	sequence	province_id	city_id	county_id	town_id	batch_status	create_time	update_time	user_name
+
+	390	2	6	-1	0	0	2	1	72	2799	0	1	2012-11-23 13:24:34.93	2012-11-23 14:43:23.34	bjchenhongyong
+
+	391	2	6	-1	0	0	2	1	72	2819	0	1	2012-11-23 13:24:34.97	2012-11-23 14:43:23.367	bjchenhongyong
+
+	392	2	6	-1	0	0	2	1	72	2839	0	1	2012-11-23 13:24:34.98	2012-11-23 14:43:23.377	bjchenhongyong
+
+B:	// 根据四级地址分组查询波次信息
+			String sql2 = "select id,sendpay,delivery_center_id,carrier_id,pay_type,site_id,sequence,province_id,city_id, " +
+				"county_id,town_id,batch_status from prm_batch (nolock) " +
+				"where batch_status>0 and province_id= :province_id and city_id= :city_id and county_id= :county_id and town_id= :town_id";
+	id	sendpay	delivery_center_id	carrier_id	pay_type	site_id	sequence	province_id	city_id	county_id	town_id	batch_status	create_time	update_time	user_name
+
+	390	2	6	-1	0	0	2	1	72	2799	0	1	2012-11-23 13:24:34.93	2012-11-23 14:43:23.34	bjchenhongyong
+	391	2	6	-1	0	0	2	1	72	2819	0	1	2012-11-23 13:24:34.97	2012-11-23 14:43:23.367	bjchenhongyong
+
+	392	2	6	-1	0	0	2	1	72	2839	0	1	2012-11-23 13:24:34.98	2012-11-23 14:43:23.377	bjchenhongyong
+
+C:	根据波次信息组合成一个波次缓存对象
+			batch = new PrmBatchInfo();
+			batch.setBatchId(NumberUtils.toInt(innerMap.get("id").toString()));
+			batch.setSendPay(NumberUtils.toInt(innerMap.get("sendpay").toString()));
+			batch.setDeliveryCenterId(NumberUtils.toInt(innerMap.get("delivery_center_id").toString()));
+			batch.setCarrierId(NumberUtils.toInt(innerMap.get("carrier_id").toString()));
+			batch.setPayType(NumberUtils.toInt(innerMap.get("pay_type").toString()));
+			batch.setSiteId(NumberUtils.toInt(innerMap.get("site_id").toString()));
+			batch.setSequence(NumberUtils.toInt(innerMap.get("sequence").toString()));
+			batch.setProvinceId(NumberUtils.toInt(innerMap.get("province_id").toString()));
+			batch.setCityId(NumberUtils.toInt(innerMap.get("city_id").toString()));
+			batch.setCountyId(NumberUtils.toInt(innerMap.get("county_id").toString()));
+			batch.setTownId(NumberUtils.toInt(innerMap.get("town_id").toString()));
+			batch.setBatchStatus(NumberUtils.toInt(innerMap.get("batch_status").toString()));
+D:	按照波次Id获取该波次所有的监控点信息
+	select batch_id,point_id,offset_days,end_time from prm_batch_point (nolock) where batch_id= :batch_id order by point_id asc
+	id	batch_id	point_id	offset_days	end_time
+
+	2724	390	1	0	22:55
+2725	390	2	0	23:00
+
+	2726	390	5	1	00:00
+2727	390	6	1	5:30
+
+	2728	390	7	1	14:00
+2729	390	8	1	15:00
+
+	2730	390	9	1	7:30
+2731	391	1	0	22:55
+
+	2732	391	2	0	23:00
+2733	391	5	1	00:00
+
+	2734	391	6	1	5:30
+2735	391	7	1	14:00
+
+E:	
