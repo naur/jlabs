@@ -1,0 +1,105 @@
+﻿BaseDeliveryCenter	33
+    DeliveryCenterId	DeliveryCenterName	Status	CreateTime	UpdateTime
+    -1	武汉奓山分拣中心	1	2013-02-06 17:35:01.907	2013-03-13 12:00:01.650
+    0	北京双树分拣中心23	1	2013-01-06 14:23:13.817	2013-02-06 15:46:00.913
+    1	北京大鲁店分拣中心	1	2012-08-01 17:22:18.563	2013-03-13 12:00:01.867
+____________________________________________________________________________________________________________________
+BaseStorehouse		125
+    Id	StockId	StockName	StockType	DeliveryCenterId	DeliveryCenterName	OrgId	OrgName	Status	AreaName	CreateTime	UpdateTime
+    465	0	3C仓A库	3C-A库	10	广州	10	广州分公司	1	华南	2012-04-13 12:00:08.000	2013-02-17 12:47:00.050
+    466	1	3C仓B库	3C-B库	10	广州	10	广州分公司	1	华南	2012-04-13 12:00:08.000	2013-02-17 12:47:00.057
+    467	2	大货仓	大货库	10	广州	10	广州分公司	1	华南	2012-04-13 12:00:08.000	2013-02-17 12:47:00.060
+____________________________________________________________________________________________________________________
+
+BaseSite		1175
+    SiteId	SiteName	ProvinceId	ProvinceName	CityId	CityName	CountyId	CountyName	TownId	TownName	Status	CreateTime	UpdateTime
+    1	中关村自提点	1	NULL	2800	NULL	2849	NULL	0	NULL	1	2012-08-13 12:12:55.103	2013-03-13 12:10:10.427
+    2	亚运村自提点	1	NULL	72	NULL	2819	NULL	0	NULL	-1	2012-08-13 12:12:54.420	2013-03-13 12:10:12.423
+    3	青龙	1	NULL	72	NULL	2840	NULL	0	NULL	1	2013-02-06 17:35:07.443	2013-03-13 12:10:10.437
+____________________________________________________________________________________________________________________
+
+PrmToSiteTime		7297
+    Id	DistributionId	StorehouseId	SiteId	NeedTime	CreateTime	Status	UpdateTime	UserName
+    223	9	2	6	1080	2012-08-31 16:07:30.960	0	2012-12-04 15:43:36.023	BJJDZ
+    224	6	0	6	480	2012-09-03 10:37:20.980	1	2012-09-11 15:54:11.030	BJJDZ
+    225	6	1	6	480	2012-09-03 10:37:21.000	1	2012-09-11 15:53:55.830	BJJDZ
+
+    SQL: where siteid = ?
+____________________________________________________________________________________________________________________
+
+BaseArea		35034
+    Id	Name	AssFid	Status	CreateTime	UpdateTime
+    1	北京	0	1	2012-04-11 18:25:11.537	2013-02-17 12:54:19.900
+    2	上海	0	1	2012-04-11 18:25:11.540	2013-02-17 12:54:19.903
+    3	天津	0	1	2012-04-11 18:25:11.543	2013-02-17 12:54:19.903
+____________________________________________________________________________________________________________________
+
+PrmDeliveryStorehouseTime	41287
+    Id	CarrierId	DistributionId	StorehouseId	ProvinceId	TownId	CityId	CountyId	NeedTime	Status	CreateTime	UpdateTime	UserName
+    264	2	6	0	1	0	2807	6491	1440	1	2012-08-31 15:39:38.903	2013-02-21 15:37:35.917	BJJDZ
+    265	1	6	1	1	0	72	2799	1440	1	2012-08-31 15:39:38.907	2013-02-21 15:37:35.917	BJJDZ
+    266	1	6	4	1	0	72	2799	1440	1	2012-08-31 15:39:38.910	2013-02-21 15:37:35.917	BJJDZ
+
+    SQL: and CarrierId = ? and DistributionId = ? and CountyId = ? and StorehouseId = ?
+    redis: "d_" + carrierId + "_" + distributionId + "_" + storehouseId + "_" + countyId
+____________________________________________________________________________________________________________________
+
+1	截止下单时间
+2	截止转移时间
+3	截止下传时间
+4	截止打印时间
+5	截止打包时间
+6	截止装车时间
+7	截止配送员收货时间
+8	截止妥投时间
+____________________________________________________________________________________________________________________
+        String keySpecial = "bs_" + sendPay + "_" + distributionId + "_" + cityId; //时效类型，配送中心，站点
+        String keyNormal = "b_" + sendPay;
+
+配送时效类型
+		agingMap=new HashMap<Integer,String>();
+		agingMap.put(0, "第三方");
+		agingMap.put(1, "普通自营");
+		agingMap.put(2, "211");
+		agingMap.put(3, "311");
+        agingMap.put(7, "411");
+		agingMap.put(4, "次日达");
+		agingMap.put(5, "晚间配送211");
+		agingMap.put(6, "晚间配送非211");
+____________________________________________________________________________________________________________________
+根据配送中心、库房和时效获取缓存中的库房开通配置新
+SELECT delivery_center_id,store_id,sendpay FROM prm_storehouse_show (nolock)
+GROUP BY delivery_center_id,store_id,sendpay
+
+				storehouseShow.setId(rs.getInt("id"));
+					storehouseShow.setDeliveryCenterId(rs.getInt("delivery_center_id"));
+					storehouseShow.setStoreId(rs.getInt("store_id"));
+					storehouseShow.setShowTypeId(rs.getInt("show_type_id"));
+					storehouseShow.setSendpay(rs.getInt("sendpay"));
+					storehouseShow.setIsShow(rs.getBoolean("is_show"));
+					storehouseShow.setShowStatus(rs.getInt("show_status"));
+public enum EnumShowType {
+	/** 波次计算. */
+	BATCH_CALCULATE(1),
+	/** 全网时刻表计算. */
+	SCHEDULE_CALCULATE(2),
+    /** 内配计算. */
+	ITMS_CALCULATE(3); 
+
+SELECT TOP 3 * FROM prm_storehouse_show (nolock)
+id	delivery_center_id	store_id	show_type_id	sendpay	is_show	show_status	create_time	update_time	user_name
+
+1	4	0	1	1	1	1	2012-07-01 00:45:37.5	2013-02-16 00:00:00.0	admin
+
+2	4	0	1	2	1	1	2012-07-01 00:45:39.19	2013-02-16 00:00:00.0	admin
+
+3	4	0	1	3	1	1	2012-07-01 00:45:41.05	2013-02-16 00:00:00.0	admin
+
+
+KEYL: store_show_deliveryCenterId_storeId_sendpay
+
+根据四级地址获取缓存里的全网时刻表波次信息
+	int provinceId, int cityId, int countyId, int townId
+根据三级地址(县id默认为0)获取缓存里的全网时刻表波次信息
+	int provinceId, int cityId, int countyId
+

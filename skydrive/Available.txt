@@ -1,0 +1,472 @@
+
+http://192.168.226.114:8080/tfs/
+
+--------------------------------------
+vpn账号：fce
+密码：360BUYcoM
+地址：https://vpn.360buy.com
+堡垒机ip更换为： 192.168.128.97， 堡垒机账号密码不变
+--------------------------------------
+192.168.229.90:3306
+root
+fceroot
+
+
+http://bbs.8264.com/thread-1628763-1-1.html
+
+jrz@live.cn
+jrzhcp
+
+http://svn.360buy-develop.com/repos/erp/erp.FCE/fce-monitor/trunk/fce-dynamic-monitor
+
+http://idengdeng.com/
+
+新的数据库服务 ip地址为192.168.228.131，用户名为sa，密码为：FCE_Promise.
+
+
+数据库是：10.10.224.66  
+user：test_msg  
+password：test_msg
+jd_msg   dbo.jd_mobile_Msg 
+
+http://bbs.8264.com/forum.php?mod=viewthread&tid=1459868
+
+行者虚竹(1040054410)14:10:36
+欢迎加入北京滑雪俱乐部超级QQ群：191553120 
+
+http://svn.360buy-develop.com/repos/erp/erp.FCE
+
+http://ump.360buy.com/
+
+
+
+mvn clean cobertura:cobertura
+
+_________ FDM 监控__________________________________________
+
+http://localhost:8080/member/getAssociate.action?params.groupKey=group2
+____________________________________________________________
+
+
+_________ 自动部署__________________________________________
+autodeploy.360buy.com
+cbsys.360buy.com
+____________________________________________________________
+
+
+
+RTX: jiaruizhi/111111
+
+review:  /promise_v3/branches/v1.1
+
+redis配置部署文档
+http://jira.360buy.com/confluence/pages/viewpage.action?pageId=5473121
+
+_________ Dubbo 联系人__________________________________________
+李鑫
+zhanghai 
+changhongqiang
+yfzhanggeng
+
+http://cf.360buy-develop.com/login.action?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D18940860
+http://cf.360buy-develop.com/dashboard.action
+这个是线上环境
+172.17.3.181  saf.360buy.com
+测试环境
+10.10.224.122    erpcd1.360buy.com    #测试环境中的统一登录域名
+192.168.229.54    testwebapp.360buy.com    #测试环境中的统一登录域名
+http://testwebapp.360buy.com/safregistryweb/index.action
+Credentials
+	bjlxdong
+	xinxibu456
+
+
+token只支持dubbo协议
+向hession 还有 webservice协议 rmi协议 是不是支持的  
+服务端和客户端在一个的话是已injvm协议访问
+
+
+SAF promise-dos
+性能测试 李凯负责
+
+vip申请
+172.17.22.157	20880	172.17.11.138	20880
+172.17.22.158	20880		
+172.17.22.159	20880		
+172.17.22.160	20880		
+
+
+_________ Open Course ____________________________________________________________
+
+
+斯坦福大学公开课：广义相对论		http://v.163.com/special/opencourse/ensteinstheory.html
+	缺：[第10集] 10 Einstein's Theory Lecture 10
+
+_____________________________________________________________________
+
+
+jiarz618@gmail.com
+sB3Gw6dN8Gf7
+yM8mK5Ep7mV7
+
+lljteam
+jiaruizhi@360buy.com
+!l20121001
+
+
+新的开发服务器IP为：192.168.229.89-----92 （共四台服务器）
+账号：root
+密码：1qaz2wsx
+
+
+
+MQ消息平台的生产环境的相关信息如下：
+hosts: 172.17.7.91 mq.360buy.com 
+生产环境WEB监控页面：http://mq.360buy.com 
+username/password: liuxiafeng/123456
+
+
+
+北京八大户外烧烤介绍http://bbs.8264.com/thread-1380315-1-1.html
+http://travel.sohu.com/20090318/n262869223.shtml
+
+wix.com/
+
+ftp
+10.10.243.138	dev dev123
+
+
+10.10.243.139	root root1234
+
+http://dbquery.360buy.com/
+                登陆名：bjwujy
+                密码：wujiyuan2000
+
+
+FTP_IP
+172.16.113.76
+ftp_r
+JHFN(%@_135AFKMTBm72okjn
+FTP_PORT=21
+
+
+账号：bjwujy
+密码： wujiyuan2000
+yanwenjing(闫文敬) 22:30:15
+http://dbquery.360buy.com/index.action
+
+
+http://promise3.360buy.com/time/showConfig.action
+
+
+10.10.245.97
+promise
+123456
+
+_____________________________________________________________
+172.16.0.0      255.255.0.0      10.10.243.1       3
+172.17.0.0      255.255.0.0      10.10.243.1       3
+192.168.0.0      255.255.0.0      10.10.243.1       3
+10.0.0.0        255.0.0.0      10.10.243.1       3
+10.0.0.0        255.0.0.0      10.10.243.1       3
+10.10.240.8
+10.10.240.0    255.255.254.0      10.10.243.1       3
+192.168.131.44
+
+192.168.131.44
+10.10.224.58
+_____________________________________________________________
+
+
+http://jira.360buy.com/confluence/display/PROTHD/Home
+
+
+http://cc.360buy.com/sitemanage/order/OrderInfo.aspx?OrderId=212644969
+
+
+
+sa/360buy
+
+10.10.224.58    sa   360buy
+10.10.224.66
+testwrite 
+test_123_*()
+ 
+
+ to_date('2012-01-01 00:00:00','yyyy-mm-dd hh24:mi:ss')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            with scrappedNotesList as
+            (
+            select id as Id,scrappedId as ScrappedId,operator as Operator,erpcode as ErpCode,opertime as OperTime,operNote as OperNote,states as States,bumen as Bumen,row_number() over (order by id) as RowNumber from ScrappedNotes with(nolock)  
+            <dynamic prepend="where">
+            <isParameterPresent>
+                <isGreaterThan prepend="and" property="ScrappedId" compareValue="0">
+                    ScrappedId=#ScrappedId#
+                </isGreaterThan>
+             <isGreaterThan prepend="and" property="States" compareValue="-1">
+                    States=#States#
+                </isGreaterThan>
+            </isParameterPresent>
+        </dynamic>
+            )
+            select Id,ScrappedId,Operator,ErpCode,OperTime,OperNote,States,Bumen,RowNumber,(select count(1) from scrappedNotesList with(nolock)) as RecordCount from scrappedNotesList with(nolock)
+            where RowNumber between #BeginRowNumber# and #EndRowNumber#
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+String timeFormat = "yyyy-MM-dd_HH:mm:ss:SSS";
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+//request.setPromiseTime(sdf.parse("2012-02-09 20:15:41.750"));
+		Calendar a= Calendar.getInstance();
+		a.set(2011, 05,28, 19,50, 2);
+		//参数为年 月 日 时 分 秒
+		a.set(Calendar.MILLISECOND, 0);
+		//设置毫秒
+		Calendar c= Calendar.getInstance();
+		c.set(2011, 05,28, 19,50, 3);
+		c.set(Calendar.MILLISECOND, 0);
+		System.out.println(a.compareTo(c));
+		//a比c早,返回-1,
+		//a与c相同,返回0
+		//a比c晚,返回1
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+String time = "2009-03-01_08:10:46:953"; 
+String timeFormat = "yyyy-MM-dd_HH:mm:ss:SSS";        
+SimpleDateFormat sdf = new SimpleDateFormat(timeFormat);        
+Date date = sdf.parse(time);
+System.out.print(sdf.format(date)); 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+http://svn.360buy-develop.com/repos/jdscm/trunk/AnswerSystem
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+
+111683390
+
+
+
+
+
+    public Information<List<OrderRepromiseTime>> test() throws ParseException {
+        String timeFormat = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(timeFormat);
+
+        OrderPromiseTimeRequest request = new OrderPromiseTimeRequest();
+        request.setPromiseTime(sdf.parse("2012-02-16"));
+        //request.setCreateTime(sdf.parse("2012-02-07"));
+        request.setSendPay("2,3");
+        //request.setProvinceId(1);
+        //request.setCountyId(0);
+        request.setCityId(148);
+
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost("http://promise.local/rest/query/time/equal/paging");
+        try {
+
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(request);
+
+            StringEntity myEntity = new StringEntity(json, "application/json",
+                    "UTF-8");
+            post.setEntity(myEntity);
+
+            HttpResponse response = client.execute(post);
+            HttpEntity retuEntity = response.getEntity();
+            InputStream content = retuEntity.getContent();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    content));
+            String line = reader.readLine();
+            while (line != null) {
+                line = reader.readLine();
+            }
+            int a = 1;
+
+        } catch (Exception ex) {
+
+        }
+
+        return getPagingListByTime(request);
+    }
+
+
+
+
+
+bjxings
+`1qwaszxcv
+
+
+
+DIM_SCM_INTEL表加了个字段MACHINE_TYPE 类型为NUMBER，  
+
+0：笔记本，1：商用电脑，2：家用电脑，3：一体机;
+
+
+to_date('2011-03-01 23:59:59','YYYY-MM-DD HH24:MI:SS')
+_______________________________________________________________________
+
+测试机ftp的ip: 10.10.222.28
+ftp_bip
+ftp_bip1@#
+10.10.222.33  ftp.bip.360buy.com
+
+_______________________________________________________________________
+public static final int TASK_STATUS_WAIT = 0; // 等待
+	public static final int TASK_STATUS_PROCESSING = 1; // 处理中
+	public static final int TASK_STATUS_FINISH = 2; // 完成
+	public static final int TASK_STATUS_FAIL = 3; // 失败
+	public static final int TASK_STATUS_DELETED = 4; // 清除
+    public static final int RESULT_TYPE_ERROR=-1;//错误文件
+    public static final int RESULT_TYPE_SUCCESS=1;//正确文件
+    public  static final int TASK_TYPE_UPLOAD=2;//上传任务类型
+    public static final int TASK_TYPE_DOWNLOAD=1;//下载任务类型
+    public static final int TASK_TYPE_UNKNOWN=-1;// 未知任务类型
+
+_______________________________________________________________________
+
+http://biptest.360buy.com/index/loadBIPMainPage.action
+bjjdz
+xinxibu456
+_______________________________________________________________________
+
+
+http://www.snappymaria.com/canvas/FunctionPlotter.html
+http://graph.tk/
+http://www.graphr.org/
+
+
+
+___________________________________________________________________________
+
+http://blog.csdn.net/47522341/article/details/3359956
+
+group by rollup(job,deptno); (从右向左的方式来进行逐个小结。)
+rollup 
+rollup的行为非常直接，它根据grouping list的rollup条款创建合计：
+首先，它计算grouping条款的标准聚合。
+然后，它按照grouping list列从右到左进行更高层的聚合。
+最后，创建n＋1层的总计。
+例如： group by rollup(A,B,C),则oracle最后得到的聚合结果为(A,B,C), (A,B), (A),()
+在产生聚合时会从右向左逐个对每一列进行小结，并在结果中生成独立的一行，同时也会对聚合列生成一个合计列。 
+________________________________________________________________________
+
+电子商城测试库
+电子商城商品销售日汇总：APP.app_EM_SALES_d
+电子商城单品销售日报表：APP.APP_EM_SALES_SIMPLE_PRODUCT_D
+电子商城销售商品分品类日汇总表：app.APP_EM_SALES_CLASS_SALE_D
+电子商城商品订单明细：dwd_EM_SALES_ORDER_DETAILE
+电子商城商品维表：dim_em_product
+电子商品分类维表：dim_em_product_level
+
+
+
+________________________________________________________________________
+
+bjwqp
+5311445wys
+ 
+http://dbquery.360buy.com/index.action 
+________________________________________________________________________
+
+
+10.10.245.173\共享目录
+用户名： admin
+密码：     bk_test
+原来共享目录中的文件已经移到新的共享目录中。
+
+
+10.10.224.160
+BITEST
+________________________________________________________________________
+
+wifi
+360buy123456
+
+________________________________________________________________________
+
+
+\\10.10.245.198\samba_share\vendorcentral
+
+http://vendorcentral.360buy.com/repository/selling.action?whereDetails.startDate=2011-11-01&whereDetails.endDate=2011-11-16&whereDetails.productId=|252736|268294|268295|270786|270787|277739|305112|305116|324877|327888|324861|333371|339057|339058|339059|350497|352956|352957|349981|350495|
+
+
+
+10.10.222.33
+1q2w3e4r5t6y7u8i
+
+10.10.224.153
+testwrite
+test_123_*()
+
+
+
+
+http://svn.360buy-develop.com/repos/pcpjava/vc/vendorcentral
+http://svn.360buy-develop.com/repos/pcpjava/vc/trunk
+
+http://vendorcentral.360buy.net:8080/repository/stock.action?whereDetails.startDate="2011-10-13"&whereDetails.endDate="2011-10-13"&whereDetails.productId=10370146
+
+
+SELECT * FROM dw.dw_wms_stockstatday
+
+UPDATE dw.dw_wms_stockstatday
+SET OP_TIME = 20111012
+
+
+10.10.245.198
+10.10.245.230
+
+
+_____________________________________________________________________________________________________________________________
+
+
+liyingliang(李英亮【测试部】) 15:03:37
+http://erp1.360buy.com/newHrm/Verify.aspx?ReturnUrl=http%3A%2F%2Fsaf.360buy.com%2F
+liyingliang(李英亮【测试部】) 15:06:32
+C:\Users\Administrator>tracert saf.360buy.com
+
+通过最多 30 个跃点跟踪
+到 saf.360buy.com [172.17.18.18] 的路由:
+
+  1    <1 毫秒    1 ms     1 ms  BJXX-LIYINGL.360buyAD.local [10.12.216.4]
+  2     1 ms     2 ms     3 ms  1.1.1.10
+  3     *        *        *     请求超时。
+  4     *        *        *     请求超时。
+  5     *        *        *     请求超时。
+  6     9 ms    10 ms    10 ms  BJXX-LIYINGL.360buyAD.local [172.17.18.18]
+
+跟踪完成。
+liyingliang(李英亮【测试部】) 15:07:18
+C:\Users\Administrator>tracert cbsys.360buy.com
+
+通过最多 30 个跃点跟踪
+到 cbsys.360buy.com [192.168.224.33] 的路由:
+
+  1    <1 毫秒    1 ms     1 ms  BJXX-LIYINGL.360buyAD.local [10.12.216.4]
+  2    <1 毫秒    1 ms     1 ms  anantes-651-1-49-1.w2-0.abo.wanadoo.fr [2.0.0.1
+]
+  3    <1 毫秒   <1 毫秒    1 ms  BJXX-LIYINGL.360buyAD.local [192.168.224.33]
+liyingliang(李英亮【测试部】) 15:08:59
+C:\Users\Administrator>tracert erp1.360buy.com
+
+通过最多 30 个跃点跟踪
+到 erp1.360buy.com [172.16.80.158] 的路由:
+
+  1    <1 毫秒    1 ms     1 ms  BJXX-LIYINGL.360buyAD.local [10.12.216.4]
+  2    <1 毫秒   <1 毫秒    1 ms  1.1.1.10
+  3     *        *        *     请求超时。
+  4     5 ms     4 ms     5 ms  BJXX-LIYINGL.360buyAD.local [172.16.80.158]
+
+跟踪完成。
+
+______________ System INIT ________________________________________________________________________________________
+host 文件
+迅雷
+招商银行
+

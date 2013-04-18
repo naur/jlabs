@@ -1,0 +1,12 @@
+[DEFAULT]
+BASEURL=http://www.cnblogs.com/Libra/archive/2009/03/24/1420731.html
+[DOC_google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__]
+BASEURL=http://www.cnblogs.com/Libra/archive/2009/03/24/1420731.html
+ORIGURL=javascript:'<script type="text/javascript">document.domain = "cnblogs.com";var adContent = window.parent["google-ad-content-olcqc7wuap1v"];window.parent["google-ad-content-olcqc7wuap1v"] = null;document.write(adContent);document.close();</script>'
+[{000214A0-0000-0000-C000-000000000046}]
+Prop3=19,2
+[InternetShortcut]
+URL=http://www.cnblogs.com/Libra/archive/2009/03/24/1420731.html
+IDList=
+IconFile=http://www.cnblogs.com/favicon.ico
+IconIndex=1

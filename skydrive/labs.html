@@ -1,0 +1,74 @@
+﻿<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    <script src="/Projects/dos_v1.0/modules/dos-web/src/main/webapp/js/common/base.js"></script>
+    <script type="text/javascript"
+            src="/Research/projects/research/naure-integrate/src/main/webapp/js/require.js"></script>
+    <style type="text/css">
+        a {
+            margin: 5px;
+            cursor: pointer;
+        }
+
+            /*分页*/
+        .pagination, .pagination li {
+            list-style: none;
+            list-style-position: outside;
+        }
+
+        .pagination li {
+            float: right;
+        }
+
+        .pagination  li a {
+            display: inline-block;
+            padding: 0 8px;
+            margin-left: 5px;
+            height: 21px;
+            line-height: 21px;
+            border: 1px solid #cccccc;
+            cursor: pointer;
+            text-decoration: none;
+            vertical-align: middle;
+        }
+
+        .pagination  li a.dots {
+            border: 0 none;
+        }
+
+        .pagination  li a:hover, a:active {
+            background: #daf1ff;
+        }
+
+        .pagination  li a.dots:hover {
+            background: #fff;
+        }
+
+        .pagination  li a.PageSelected {
+            background: #daf1ff;
+        }
+
+    </style>
+    <script type="text/javascript">
+        var dom = {
+            paging: '#paging'
+        };
+
+        $(function () {
+            dos.ui.pagination({
+                container: dom.paging,
+                total: 100,
+                index: 5,
+                handler: function (opt) {
+                    //alert(JSON.stringify(opt));
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<ul class="pagination">
+    <li id="paging"></li>
+</ul>
+</body>
+</html>
