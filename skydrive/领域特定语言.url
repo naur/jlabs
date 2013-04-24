@@ -1,0 +1,12 @@
+[DEFAULT]
+BASEURL=http://www.infoq.com/cn/minibooks/domain-specific-languages
+[DOC_google_ads_iframe_zh_300x250_banner_top]
+BASEURL=http://www.infoq.com/cn/minibooks/domain-specific-languages
+ORIGURL=about:blank
+[{000214A0-0000-0000-C000-000000000046}]
+Prop3=19,2
+[InternetShortcut]
+URL=http://www.infoq.com/cn/minibooks/domain-specific-languages
+IDList=
+IconFile=http://cdn2.infoq.com/favicon.ico?20110420
+IconIndex=1

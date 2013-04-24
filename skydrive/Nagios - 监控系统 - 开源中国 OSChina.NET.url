@@ -1,0 +1,15 @@
+[DEFAULT]
+BASEURL=http://www.oschina.net/p/nagios
+[DOC_aswift_0]
+BASEURL=http://www.oschina.net/p/nagios
+ORIGURL=
+[DOC_aswift_0_google_ads_frame1#25]
+BASEURL=http://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-7090564139599510&output=html&h=90&slotname=6858346607&w=728&lmt=1366683515&flash=11.6.602.180&url=http%3A%2F%2Fwww.oschina.net%2Fp%2Fnagios&dt=1366683514655&bpp=5&shv=r20130418&cbv=r20130206&correlator=1366683514738&frm=20&adk=1310943525&ga_vid=2050420568.1366683516&ga_sid=1366683516&ga_hid=2053855879&ga_fc=0&u_tz=480&u_his=1&u_java=1&u_h=768&u_w=1366&u_ah=728&u_aw=1366&u_cd=24&u_nplug=0&u_nmime=0&dff=times%20new%20roman&dfs=13&adx=178&ady=2104&biw=1349&bih=651&eid=317150301&oid=3&ref=http%3A%2F%2Fcn.bing.com%2Fsearch%3Fq%3Dnagios%2B%26qs%3Dn%26form%3DQBLH%26pq%3Dnagios%2B%26sc%3D8-7%26sp%3D-1%26sk%3D&docm=10&fu=0&ifi=1&dtd=1067&xpc=6OWHmh9WWP&p=http%3A//www.oschina.net
+ORIGURL=
+[{000214A0-0000-0000-C000-000000000046}]
+Prop3=19,2
+[InternetShortcut]
+URL=http://www.oschina.net/p/nagios
+IDList=
+IconFile=http://www.oschina.net/img/favicon.ico
+IconIndex=1
