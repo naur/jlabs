@@ -1,9 +1,9 @@
-package lab;
+package labs.feature;
+
+import labs.Enable;
+import labs.Sub;
 
 import java.io.*;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.WritableByteChannel;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,6 +15,19 @@ import java.nio.channels.WritableByteChannel;
 
 @Enable(true)
 public class JLoad extends Sub {
+    /**
+     *  打印 ClassLoader
+     *  JVM规范定义了两种类型的类装载器：
+     *          启动内装载器(bootstrap)
+     *          用户自定义装载器(user-defined class loader)。
+     *  JVM在运行时会产生三个ClassLoader：
+     *          Bootstrap ClassLoader、
+     *          Extension ClassLoader和
+     *          AppClassLoader
+     *          其中，Bootstrap是用C++编写的，我们在Java中看不到它，是null。它用来加载核心类库
+     *  三者的关系为:AppClassLoader的Parent是ExtClassLoader，而ExtClassLoader的Parent为BootstrapClassLoader。
+     * @throws Exception
+     */
     @Override
     public void execute() throws Exception {
         System.out.println(format(1, "Java Loader Tree."));
@@ -30,7 +43,9 @@ public class JLoad extends Sub {
     }
 
 
-    //
+    /**
+     *用户自定义 user-defined class loader
+     */
     public class CustomClassLoader extends ClassLoader {
         private String rootDir;
 

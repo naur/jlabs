@@ -1,4 +1,6 @@
-package lab;
+package labs.feature;
+
+import labs.Sub;
 
 import java.io.FileOutputStream;
 import java.net.URL;

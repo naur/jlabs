@@ -1,4 +1,4 @@
-package lab;
+package labs;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
