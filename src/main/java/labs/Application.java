@@ -15,7 +15,8 @@ import java.util.List;
 public class Application {
 
     private static String[] packageNames = new String[]{
-            "labs.feature"
+            "labs.feature",
+            "labs.algorithms"
     };
 
     /**

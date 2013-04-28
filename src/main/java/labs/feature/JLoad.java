@@ -13,7 +13,7 @@ import java.io.*;
  * To change this template use File | Settings | File Templates.
  */
 
-@Enable(true)
+@Enable(false)
 public class JLoad extends Sub {
     /**
      *  打印 ClassLoader
