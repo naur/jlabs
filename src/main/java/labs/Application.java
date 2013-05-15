@@ -16,7 +16,8 @@ public class Application {
 
     private static String[] packageNames = new String[]{
             "labs.feature",
-            "labs.algorithms"
+            "labs.algorithms",
+            "labs.nosql"
     };
 
     /**
@@ -38,6 +39,9 @@ public class Application {
             sub = (Sub) cla.newInstance();
             sub.execute();
         }
+
+        System.out.println("___________complete___________");
+        System.exit(0);
     }
 
     private static List<Class> loadPackage(String packageName, ClassLoader classLoader) throws ClassNotFoundException, NoSuchMethodException {
