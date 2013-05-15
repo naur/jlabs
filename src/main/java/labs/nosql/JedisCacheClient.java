@@ -29,15 +29,17 @@ import java.util.Set;
 public class JedisCacheClient {
 
     private static final Logger log = LoggerFactory.getLogger(JedisCacheClient.class);
-
     private static final Properties jedisProp = new Properties();
-
     private static ShardRedisConfig shardRedisConfig;
-
     private static ShardClientFactory shardClientFactory;
-
     private static RedisCommands jedis;
+    private int defaultCacheExpir = 30 * 24 * 60 * 60;
+    // 使用单例
+    private static JedisCacheClient instance;
+    private static Object lock = new Object();
 
+    private JedisCacheClient() {
+    }
 
     //private static  JedisPool pool;
 
@@ -71,7 +73,17 @@ public class JedisCacheClient {
         }
     }
 
+    public static JedisCacheClient getInstance() {
+        if (instance == null) {
+            synchronized (lock) {
+                instance = new JedisCacheClient();
+            }
+        }
+        return instance;
+    }
+
     public RedisCommands getJedis() {
         return jedis;
     }
+
 }

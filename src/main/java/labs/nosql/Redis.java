@@ -18,11 +18,11 @@ public class Redis extends Sub {
     @Override
     public void execute() throws Exception {
         double code = Math.floor(Math.random() * 100);
-        RedisCommands commands = cacheService.getServie();
+        RedisCommands commands = cacheService.getJedis();
         String result = commands.set(perfix + "a", "Hello world ! " + code);
         System.out.println(result + ", code: " + code);
     }
 
-    private CacheService cacheService = CacheService.getInstance();
+    private JedisCacheClient cacheService = JedisCacheClient.getInstance();
     private String perfix = "labs:";
 }
