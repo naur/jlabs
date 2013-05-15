@@ -17,7 +17,7 @@ import java.util.Random;
 public class Redis extends Sub {
     @Override
     public void execute() throws Exception {
-        int code = Math.random();
+        double code = Math.floor(Math.random() * 100);
         RedisCommands commands = cacheService.getServie();
         String result = commands.set(perfix + "a", "Hello world ! " + code);
         System.out.println(result + ", code: " + code);
