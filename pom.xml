@@ -9,14 +9,15 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <org.springframework.version>3.1.1.RELEASE</org.springframework.version>
+        <springframework.version>3.1.1.RELEASE</springframework.version>
         <slf4j.version>1.6.4</slf4j.version>
         <log4j.version>1.2.16</log4j.version>
         <jackson.version>1.9.2</jackson.version>
 
         <!--<redis.hosts>192.168.229.90:6379,192.168.229.91:6380 192.168.229.91:6379,192.168.229.92:6380 192.168.229.92:6379,192.168.229.90:6380</redis.hosts>-->
         <redis.hosts>10.12.216.68:6379,10.12.216.68:6380</redis.hosts>
-        <redis.zkServers>192.168.229.90:6180,192.168.229.91:6180,192.168.229.92:6180/promise</redis.zkServers>
+        <!--<redis.zkServers>192.168.229.90:6180,192.168.229.91:6180,192.168.229.92:6180/promise</redis.zkServers>-->
+        <redis.zkServers>10.12.216.68:2181,10.12.216.68:2182,10.12.216.68:2183/labs</redis.zkServers>
     </properties>
 
     <dependencies>
@@ -39,17 +40,17 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>${org.springframework.version}</version>
+            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>${org.springframework.version}</version>
+            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${org.springframework.version}</version>
+            <version>${springframework.version}</version>
             <exclusions>
                 <!-- Exclude Commons Logging in favor of SLF4j -->
                 <exclusion>
@@ -65,6 +66,35 @@
             <artifactId>jedis</artifactId>
             <version>2.0.0</version>
         </dependency>
+
+        <!-- ActiveMQ platform -->
+        <dependency>
+            <groupId>com.jd.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>11.0.1</version>
+        </dependency>
+        <!-- amq -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.apache.activemq</groupId>-->
+        <!--<artifactId>activemq-pool</artifactId>-->
+        <!--<version>5.5.1</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+
         <!-- jackson -->
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
@@ -79,13 +109,13 @@
         <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
-            <version>3.4.2</version>
+            <version>3.4.5</version>
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>com.jd.redis</groupId>-->
-            <!--<artifactId>jd-redis</artifactId>-->
-            <!--<version>1.2.1</version>-->
+        <!--<groupId>com.jd.redis</groupId>-->
+        <!--<artifactId>jd-redis</artifactId>-->
+        <!--<version>1.2.1</version>-->
         <!--</dependency>-->
 
         <!-- Logging -->

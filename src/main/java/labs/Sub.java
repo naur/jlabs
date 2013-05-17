@@ -21,7 +21,7 @@ public abstract class Sub {
         return map.toString();
     }
 
-    protected String format(int index, Object... msg) {
+    protected String format(int index, Object msg) {
         return MessageFormat.format(formatExpression[index - 1], msg);
     }
 

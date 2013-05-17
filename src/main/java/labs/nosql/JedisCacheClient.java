@@ -67,6 +67,9 @@ public class JedisCacheClient {
             shardClientFactory = new ShardClientFactory();
             shardClientFactory.setConfig(shardRedisConfig);
             shardClientFactory.setHosts(jedisProp.getProperty("redis.hosts"));
+
+            System.out.println("redis: " + jedisProp.getProperty("redis.hosts") + "\tzkServers: " + jedisProp.getProperty("redis.zkServers"));
+
             jedis = shardClientFactory.createShardClient();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -76,7 +79,7 @@ public class JedisCacheClient {
     public static JedisCacheClient getInstance() {
         if (instance == null) {
             synchronized (lock) {
-                instance = new JedisCacheClient();
+                if (instance == null) instance = new JedisCacheClient();
             }
         }
         return instance;
