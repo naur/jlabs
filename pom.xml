@@ -13,11 +13,11 @@
         <slf4j.version>1.6.4</slf4j.version>
         <log4j.version>1.2.16</log4j.version>
         <jackson.version>1.9.2</jackson.version>
-
+        <log.file.path>/logs</log.file.path>
         <!--<redis.hosts>192.168.229.90:6379,192.168.229.91:6380 192.168.229.91:6379,192.168.229.92:6380 192.168.229.92:6379,192.168.229.90:6380</redis.hosts>-->
-        <redis.hosts>10.12.216.68:6379,10.12.216.68:6380</redis.hosts>
+        <redis.hosts>192.168.1.105:6379,192.168.1.105:6380</redis.hosts>
         <!--<redis.zkServers>192.168.229.90:6180,192.168.229.91:6180,192.168.229.92:6180/promise</redis.zkServers>-->
-        <redis.zkServers>10.12.216.68:2181,10.12.216.68:2182,10.12.216.68:2183/labs</redis.zkServers>
+        <redis.zkServers>192.168.1.105:2181,192.168.1.105:2182,192.168.1.105:2183/labs</redis.zkServers>
     </properties>
 
     <dependencies>
@@ -67,34 +67,6 @@
             <version>2.0.0</version>
         </dependency>
 
-        <!-- ActiveMQ platform -->
-        <dependency>
-            <groupId>com.jd.activemq</groupId>
-            <artifactId>activemq-client</artifactId>
-            <version>4.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>11.0.1</version>
-        </dependency>
-        <!-- amq -->
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-all</artifactId>
-            <version>5.5.1</version>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.apache.activemq</groupId>-->
-        <!--<artifactId>activemq-pool</artifactId>-->
-        <!--<version>5.5.1</version>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jms</artifactId>
-            <version>${springframework.version}</version>
-        </dependency>
-
         <!-- jackson -->
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
@@ -142,6 +114,33 @@
             <version>${log4j.version}</version>
         </dependency>
 
+        <!-- ActiveMQ platform -->
+        <!--<dependency>-->
+        <!--<groupId>com.jd.activemq</groupId>-->
+        <!--<artifactId>activemq-client</artifactId>-->
+        <!--<version>4.3.0</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>11.0.1</version>
+        </dependency>
+        <!-- amq -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.apache.activemq</groupId>-->
+        <!--<artifactId>activemq-pool</artifactId>-->
+        <!--<version>5.5.1</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
 
     </dependencies>
 

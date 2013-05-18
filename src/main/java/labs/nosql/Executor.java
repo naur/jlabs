@@ -19,12 +19,68 @@ import java.io.OutputStream;
  */
 public class Executor implements Watcher, Runnable, DataMonitor.DataMonitorListener {
 
-    public Executor(String hostPort, String znode) throws KeeperException, IOException {
+    String znode;
+    DataMonitor dm;
+    ZooKeeper zk;
+    String exec[];
+    Process child;
+
+    public Executor(String hostPort, String znode, String exec[]) throws KeeperException, IOException {
+        this.exec = exec;
         zk = new ZooKeeper(hostPort, 3000, this);
         dm = new DataMonitor(zk, znode, null, this);
     }
 
-    @Override
+    /**
+     * ************************************************************************
+     * We do process any events ourselves, we just need to forward them on.
+     *
+     * @see org.apache.zookeeper.Watcher#process(org.apache.zookeeper.proto.WatcherEvent)
+     */
+    public void process(WatchedEvent event) {
+        dm.process(event);
+    }
+
+    public void run() {
+        try {
+            synchronized (this) {
+                while (!dm.dead) {
+                    wait();
+                }
+            }
+        } catch (InterruptedException e) {
+        }
+    }
+
+    public void closing(int rc) {
+        synchronized (this) {
+            notifyAll();
+        }
+    }
+
+    static class StreamWriter extends Thread {
+        OutputStream os;
+
+        InputStream is;
+
+        StreamWriter(InputStream is, OutputStream os) {
+            this.is = is;
+            this.os = os;
+            start();
+        }
+
+        public void run() {
+            byte b[] = new byte[80];
+            int rc;
+            try {
+                while ((rc = is.read(b)) > 0) {
+                    os.write(b, 0, rc);
+                }
+            } catch (IOException e) {
+            }
+        }
+    }
+
     public void exists(byte[] data) {
         if (data == null) {
             if (child != null) {
@@ -60,57 +116,6 @@ public class Executor implements Watcher, Runnable, DataMonitor.DataMonitorListe
                 new StreamWriter(child.getErrorStream(), System.err);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public void closing(int rc) {
-        synchronized (this) {
-            notifyAll();
-        }
-    }
-
-    @Override
-    public void run() {
-        try {
-            synchronized (this) {
-                while (!dm.dead) {
-                    wait();
-                }
-            }
-        } catch (InterruptedException e) {
-        }
-    }
-
-    @Override
-    public void process(WatchedEvent watchedEvent) {
-        dm.process(event);
-    }
-
-    String znode;
-    DataMonitor dm;
-    ZooKeeper zk;
-    Process child;
-
-    static class StreamWriter extends Thread {
-        OutputStream os;
-        InputStream is;
-
-        StreamWriter(InputStream is, OutputStream os) {
-            this.is = is;
-            this.os = os;
-            start();
-        }
-
-        public void run() {
-            byte b[] = new byte[80];
-            int rc;
-            try {
-                while ((rc = is.read(b)) > 0) {
-                    os.write(b, 0, rc);
-                }
-            } catch (IOException e) {
             }
         }
     }
