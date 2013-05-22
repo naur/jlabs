@@ -14,10 +14,12 @@
         <log4j.version>1.2.16</log4j.version>
         <jackson.version>1.9.2</jackson.version>
         <log.file.path>/logs</log.file.path>
-        <!--<redis.hosts>192.168.229.90:6379,192.168.229.91:6380 192.168.229.91:6379,192.168.229.92:6380 192.168.229.92:6379,192.168.229.90:6380</redis.hosts>-->
-        <redis.hosts>192.168.1.105:6379,192.168.1.105:6380</redis.hosts>
+        <redis.hosts>192.168.229.90:6379,192.168.229.91:6380 192.168.229.91:6379,192.168.229.92:6380
+        192.168.229.92:6379,192.168.229.90:6380
+        </redis.hosts>
+        <!--<redis.hosts>vmhost:6379,vmhost:6380</redis.hosts>-->
         <!--<redis.zkServers>192.168.229.90:6180,192.168.229.91:6180,192.168.229.92:6180/promise</redis.zkServers>-->
-        <redis.zkServers>192.168.1.105:2181,192.168.1.105:2182,192.168.1.105:2183/labs</redis.zkServers>
+        <redis.zkServers>vmhost:2181,vmhost:2182,vmhost:2183/labs</redis.zkServers>
     </properties>
 
     <dependencies>

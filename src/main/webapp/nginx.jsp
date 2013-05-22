@@ -13,7 +13,7 @@
     <%!
         private static String htmlFormat = "<span>{0}</span>{1}<br />";
 
-        String format(String... msg) {
+        String format(String... msg) {ta
             //return String.format(htmlFormat, msg);
             if (msg.length < 2)
                 return MessageFormat.format(htmlFormat, msg[0], "");

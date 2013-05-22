@@ -17,13 +17,14 @@ import java.util.concurrent.CountDownLatch;
  * Time: 下午6:07
  * To change this template use File | Settings | File Templates.
  */
-@Enable(true)
+@Enable(false)
 public class Redis extends Sub {
     private static final Logger logger = LoggerFactory.getLogger(Redis.class);
 
     public void execute() throws Exception {
         double code = Math.floor(Math.random() * 100);
         replicatedZookeeper("a", code);
+        //new ZookeeperService().test();
     }
 
 

@@ -4,6 +4,7 @@ import org.apache.zookeeper.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -18,9 +19,9 @@ public class ZookeeperService {
 //        String result = commands.set(perfix + "a", "Hello world ! " + code);
 //        System.out.println(result + ", code: " + code);
 
-        String hostPort = "192.168.1.105:2181,192.168.1.105:2182,192.168.1.105:2183";
-        String path = "/labs";
+        String hostPort = "vmhost:2181,vmhost:2182,vmhost:2183/labs";
 
+        cdl = new CountDownLatch(1);
         try {
             countDownLatch = new CountDownLatch(1);
             ZooKeeper zk = new ZooKeeper(hostPort, 3000, new Watcher() {
@@ -38,8 +39,22 @@ public class ZookeeperService {
             });
             countDownLatch.await();
 
-            String result = zk.create("/labs/" + String.valueOf(code), "aaa".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-            System.out.println(result);
+//            String result = zk.create("/" + String.valueOf(code), "aaa".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+//            System.out.println(result);
+
+
+            try {
+                String path = zk.create("/leader", null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+            } catch (Exception ex) {
+            }
+
+            zk.create("/leader/lock-", null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+            watchNode("/leader", zk);
+
+            System.out.println("-------");
+
+            cdl.await();
+
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -47,5 +62,27 @@ public class ZookeeperService {
         System.out.println("zookeeper connected. ");
     }
 
+    private void watchNode(final String path, final ZooKeeper zk) throws KeeperException, InterruptedException {
+        List<String> children = zk.getChildren(path, new Watcher() {
+            @Override
+            public void process(WatchedEvent event) {
+                System.out.println(event.toString());
+                if (event.getType() == Event.EventType.NodeChildrenChanged ||
+                        event.getType() == Event.EventType.NodeCreated ||
+                        event.getType() == Event.EventType.NodeDeleted) {
+                    try {
+                        watchNode(path, zk);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    } catch (KeeperException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+        System.out.println(children.toString());
+    }
+
     private CountDownLatch countDownLatch;
+    private CountDownLatch cdl;
 }
