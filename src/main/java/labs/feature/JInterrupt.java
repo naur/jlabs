@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * Time: 上午11:33
  * To change this template use File | Settings | File Templates.
  */
-@Enable(true)
+@Enable(false)
 public class JInterrupt extends Sub {
 
     @Override
