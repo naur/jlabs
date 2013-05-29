@@ -14,7 +14,7 @@ import java.util.TreeMap;
  * Time: 上午10:40
  * To change this template use File | Settings | File Templates.
  */
-@Enable(true)
+@Enable(false)
 public class ConsistentHashing extends Sub {
     @Override
     public void execute() throws Exception {

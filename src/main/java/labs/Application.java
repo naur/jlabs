@@ -17,7 +17,8 @@ public class Application {
     private static String[] packageNames = new String[]{
             "labs.feature",
             "labs.algorithms",
-            "labs.nosql"
+            "labs.nosql",
+            "labs.database"
     };
 
     /**
@@ -36,8 +37,12 @@ public class Application {
 
         Sub sub = null;
         for (Class cla : classes) {
-            sub = (Sub) cla.newInstance();
-            sub.execute();
+            try {
+                sub = (Sub) cla.newInstance();
+                sub.execute();
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
         }
 
         System.out.println("___________complete___________");
