@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.0.min.js"></script>
+    <script src="file:///D:/Research/projects/jlabs/src/main/webapp/js/scs.chart.js" type="text/javascript"></script>
+    <!--<script src="/js/scs.ui.js" type="text/javascript"></script>-->
+    <script>
+        var chartLine, panel, panelInfo, ttt = true;
+
+        function switchPanelStyle(style1, style2) {
+            panelInfo[style1] = {
+                width: $("#panel").css("width"),
+                height: $("#panel").css("height"),
+                offset: $("#panel").offset(),
+                position: $("#panel").css("position"),
+                outerHeight: $("#panel").outerHeight()
+            };
+            $("#panel").css("width", panelInfo[style2].width);
+            $("#panel").css("height", panelInfo[style2].height);
+//            $("#panel").css("top", panelInfo[style1].offset.top + panelInfo[style1].outerHeight + 1);
+//            $("#panel").css("left", panelInfo[style1].offset.left);
+            $("#panel").css("position", panelInfo[style2].position);
+            //$(opt.dom.prompt).css("top", $(opt.target).offset().top + $(opt.target).outerHeight() + 1);
+            //$(opt.dom.prompt).css("left", $(opt.target).offset().left);
+        }
+
+        $(function () {
+            $("body").on('mousemove', function () {
+                window.status = 'sadfasdf';
+                $('#info1').text(
+                        JSON.stringify($("#panel").offset()) + "," +
+                                "position: " + $("#panel").css("position") + "," +
+                                "width:" + $("#panel").attr("width") + "," +
+                                "height:" + $("#panel").attr("height")
+                );
+                $('#info2').text(JSON.stringify(panelInfo));
+            });
+            chartLine = new chart.line({
+                points: [
+                    {point: 't-x            t-y   ', title: '|- 配送单到站区间 -|   '},
+                    {point: '最早送达时间（t）', title: '       |- 指定送货时间段 -|'}
+                ],
+                container: $('.chart:eq(0)')
+            });
+
+            $("#panel").on('click', function () {
+                if (ttt)
+                    switchPanelStyle('sty1', 'sty2');
+                else
+                    switchPanelStyle('sty2', 'sty1');
+                ttt = !ttt;
+            });
+
+            $('input[type=button]').on('click', function () {
+                chartLine.refresh({
+                    points: [
+                        {point: 't-ZZZ            t-ZZZ   ', title: '|- 配--到站区间 -|   '},
+                        {point: '最早---时间（t）', title: '       |- 指定--货时间段 -|'},
+                        {point: 'aaa', title: 'bbb'}
+                    ]
+                });
+            });
+
+            panelInfo = {
+                sty1: null,
+                sty2: {
+                    width: '600px',
+                    height: '100px',
+                    position: 'absolute'
+                }
+            };
+        });
+    </script>
+</head>
+<body>
+<!--<canvas class="chart"></canvas>-->
+<input type="button" id="go" value=" Go! "/>
+
+<div>
+    <div>
+        info: <span id="info1"/>
+    </div>
+    <div>
+        info: <span id="info2"/>
+    </div>
+    <div>aaaaa</div>
+    <div id="panel" style="width: 400px; height: 30px;background-color: yellowgreen;">
+        <input type="checkbox"/>a
+        <input type="checkbox"/>b
+        <input type="checkbox"/>c
+        <input type="checkbox"/>d
+    </div>
+    <div>bbbbbb</div>
+</div>
+
+</body>
+</html>

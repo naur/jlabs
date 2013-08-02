@@ -3,10 +3,25 @@ var chart = {};
 /**
  * 画线段
  * 使用方式：
+ * 页面：
  * html: <canvas class="chart"></canvas>
- * chart.line({
-                container: '.chart',
-                coordinate: {X1: x1, X2: x2, Y1: null, Y2: null}
+ * 脚本：
+ chartLine = new chart.line({
+                points: [
+                    {point: 't-x            t-y   ', title: '|- 配送单到站区间 -|   '},
+                    {point: '最早送达时间（t）', title: '       |- 指定送货时间段 -|'}
+                ],
+                container: $('.chart:eq(0)')
+            });
+
+ $('input[type=button]').on('click', function () {
+                chartLine.refresh({
+                    points: [
+                        {point: 't-ZZZ            t-ZZZ   ', title: '|- 配--到站区间 -|   '},
+                        {point: '最早---时间（t）', title: '       |- 指定--货时间段 -|'},
+                        {point: 'aaa', title: 'bbb'}
+                    ]
+                });
             });
  * @param options
  */
@@ -26,7 +41,7 @@ chart.line = function (options) {
 
     this.render = function () {
         opt.graph = $(opt.container);
-        if (!opt.graph[0].getContext) return;
+        if (!opt.graph[0] || !opt.graph[0].getContext) return;
         opt.ctx = $(opt.graph)[0].getContext("2d");
 
         if (!opt.width)
