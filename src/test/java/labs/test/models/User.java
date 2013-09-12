@@ -8,6 +8,12 @@ public class User {
     private String name;
     private String comment;
 
+    public void User() {
+        id = Integer.parseInt(String.valueOf(Math.random()));
+        name = id + " name";
+        comment = id + " comment";
+    }
+
     public int getId() {
         return id;
     }
@@ -31,4 +37,9 @@ public class User {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+//    @Override
+//    public String toString() {
+//        return "User: id=" + id + ", name=" + name + ", comment=" + comment;
+//    }
 }

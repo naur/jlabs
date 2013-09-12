@@ -18,9 +18,9 @@ public class BllUnitRule implements MethodRule {
     private static BllUnitRunner runner = new BllUnitRunner();
 
     public <T> T getBean(Class<T> clazz) {
-        if (!adapters.containsKey(clazz)) return null;
+        if (!adapters.containsKey(getCaller())) return null;
 
-        return (T) adapters.get(clazz).getEntities().get(clazz);
+        return (T) adapters.get(getCaller()).getEntities().get(clazz);
     }
 
     private String getCaller() {

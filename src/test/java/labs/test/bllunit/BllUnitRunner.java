@@ -47,16 +47,21 @@ class BllUnitRunner {
 
     private void beforeOrAfter(BllUnitTestContext testContext, boolean isSetup,
                                Collection<AnnotationAttributes> annotations) throws Exception {
-        testContext.getEntities().put(Person.class, new Person() {{
-            setId(618);
-            setName("demo person");
-            setType("test");
-        }});
-        testContext.getEntities().put(User.class, new User() {{
-            setId(1900);
-            setName("demo user");
-            setComment("test");
-        }});
+        for (AnnotationAttributes annotation : annotations) {
+            for (String value : annotation.getValue()) {
+                testContext.getEntities().put(Class.forName(value), Class.forName(value).newInstance());
+            }
+        }
+//        testContext.getEntities().put(Person.class, new Person() {{
+//            setId(618);
+//            setName("demo person");
+//            setType("test");
+//        }});
+//        testContext.getEntities().put(User.class, new User() {{
+//            setId(1900);
+//            setName("demo user");
+//            setComment("test");
+//        }});
     }
 
     private <T extends Annotation> Collection<T> getAnnotations(BllUnitTestContext testContext, Class<T> annotationType) {

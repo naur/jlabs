@@ -8,6 +8,12 @@ public class Person {
     private String name;
     private String type;
 
+    public void User() {
+        id = Integer.parseInt(String.valueOf(Math.random()));
+        name = id + " name";
+        type = id + " type";
+    }
+
     public int getId() {
         return id;
     }
@@ -31,4 +37,9 @@ public class Person {
     public void setType(String type) {
         this.type = type;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Person: id=" + id + ", name=" + name + ", type=" + type;
+//    }
 }
