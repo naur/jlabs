@@ -38,7 +38,7 @@ public class JLoad extends Sub {
             loader = loader.getParent();
         }
 
-        //Class.forName
+        //TODO Class.forName (http://www.cnblogs.com/wjkaola123/archive/2009/11/23/1609119.html)
         System.out.println(format(1, "End"));
     }
 
@@ -62,6 +62,9 @@ public class JLoad extends Sub {
          * 两种类加载器的关联之处在于：一个类的定义加载器是它引用的其它类的初始加载器。
          * 如类 com.example.Outer引用了类 com.example.Inner，则由类 com.example.Outer的定义加载器负责启动类 com.example.Inner的加载过程。
          * 方法 loadClass()抛出的是 java.lang.ClassNotFoundException异常；方法 defineClass()抛出的是 java.lang.NoClassDefFoundError异常。
+         * TODO http://blog.csdn.net/iceman1952/article/details/1523025
+         * TODO loadClass: 启动类的加载过程
+         * TODO defineClass: 真正完成类的加载工作
          */
         protected Class<?> findClass(String name) throws ClassNotFoundException {
             byte[] classData = getClassData(name);
