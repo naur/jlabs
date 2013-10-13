@@ -1,5 +1,6 @@
 package labs.test.bllunit;
 
+import labs.entities.User;
 import labs.test.bllunit.annotation.BllAfter;
 import labs.test.bllunit.annotation.BllBefore;
 import org.slf4j.Logger;
@@ -10,10 +11,7 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.Assert;
 
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 9/12/13.
@@ -47,16 +45,25 @@ class BllUnitRunner {
         }
     }
 
+    /**
+     * beforeOrAfter
+     */
     private void beforeOrAfter(BllUnitTestContext testContext, boolean isSetup,
                                Collection<AnnotationAttributes> annotations) throws Exception {
+        List<String> str = new ArrayList<>();
         for (AnnotationAttributes annotation : annotations) {
-            testContext.getConfigContext(ClassPathXmlApplicationContext.class).setConfigLocations(annotation.getXml());
-            for (Class<?> config : annotation.getConfig()) {
-                testContext.getConfigContext(AnnotationConfigApplicationContext.class).register(config);
-            }
+            str.addAll(Arrays.asList(annotation.getXml()));
+            //register BllBefore.config 指定的 Configuration
+            testContext.getConfigContext(AnnotationConfigApplicationContext.class).register(annotation.getConfig());
+            testContext.getConfigContext(AnnotationConfigApplicationContext.class).refresh();
         }
+        //register BllBefore.xml 指定的 Configuration
+        testContext.getConfigContext(ClassPathXmlApplicationContext.class).setConfigLocations(str.toArray(new String[0]));
     }
 
+    /**
+     * 收集 BllBefore 和 BllAfter 的注解信息
+     */
     private <T extends Annotation> Collection<T> getAnnotations(BllUnitTestContext testContext, Class<T> annotationType) {
         List<T> annotations = new ArrayList<T>();
         addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestClass(), annotationType));

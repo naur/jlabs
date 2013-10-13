@@ -1,9 +1,13 @@
 package labs.test.bllunit;
 
 import org.junit.runners.model.FrameworkMethod;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.AbstractRefreshableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -39,11 +43,22 @@ class BllUnitTestContextAdapter implements BllUnitTestContext {
 
     public <T> T getBean(Class<T> clazz) {
         T t = null;
+        boolean isFind = true;
         for (ApplicationContext context : this.applicationContexts.values()) {
-            t = (T) context.getBean(clazz);
-            if (t != null) {
-                break;
+            //ClassPathXmlApplicationContext需要调用 refresh()
+            //AnnotationConfigApplicationContext  不能调用 refresh()
+            if (context instanceof AbstractRefreshableApplicationContext)
+                ((AbstractRefreshableApplicationContext) context).refresh();
+            try {
+                t = (T) context.getBean(clazz);
+            } catch (NoSuchBeanDefinitionException ex) {
+                isFind = false;
             }
+            if (isFind) break;
+//            if (context.containsBean(clazz.getName()) && null != (t = (T) context.getBean(clazz))) {
+//                break;
+//                //context.containsBeanDefinition(clazz.getName())
+//            }
         }
         return t;
     }
@@ -52,7 +67,7 @@ class BllUnitTestContextAdapter implements BllUnitTestContext {
     public <T extends ApplicationContext> T getConfigContext(Class<T> clazz) {
         if (!this.applicationContexts.containsKey(clazz)) {
             try {
-                this.applicationContexts.put(clazz, clazz.newInstance());
+                this.applicationContexts.put(clazz, (ApplicationContext) Class.forName(clazz.getName()).newInstance());
             } catch (Exception ex) {
             }
         }

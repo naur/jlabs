@@ -21,22 +21,13 @@ public class BllDemoTest extends UnitTestBase {
     @Test
     @BllBefore(config = {labs.test.dataset.BllDemoTestContext.class})
     public void testConfig() {
-        User user = rule.getBean(User.class);
-        Assert.assertNotNull(user);
-        System.out.println(user.toString());
-
-        Person person = rule.getBean(Person.class);
-        Assert.assertNotNull(person);
-        System.out.println(person.toString());
+        beanTest();
     }
 
     @Test
     @BllBefore(xml = {"classpath:dataset/demo.xml"})
     public void testXml() {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(BllDemoTestContext.class);
-        User user1 = ctx.getBean(User.class);
-        Assert.assertNotNull(user1);
-        System.out.println(user1.toString());
+        beanTest();
     }
 
     @Test
@@ -45,10 +36,16 @@ public class BllDemoTest extends UnitTestBase {
             xml = {"classpath:dataset/demo.xml"}
     )
     public void testConfigAndXml() {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(BllDemoTestContext.class);
-        User user1 = ctx.getBean(User.class);
-        Assert.assertNotNull(user1);
-        System.out.println(user1.toString());
+        beanTest();
     }
 
+    private void beanTest() {
+        User user = rule.getBean(User.class);
+        Assert.assertNotNull(user);
+        System.out.println(user.toString());
+
+        Person person = rule.getBean(Person.class);
+        Assert.assertNotNull(person);
+        System.out.println(person.toString());
+    }
 }

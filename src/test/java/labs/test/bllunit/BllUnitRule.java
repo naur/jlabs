@@ -21,13 +21,12 @@ public class BllUnitRule implements MethodRule {
     private static BllUnitRunner runner = new BllUnitRunner();
 
     public <T> T getBean(Class<T> clazz) {
-        if (!adapters.containsKey(getCaller())) return null;
-
-        return ((BllUnitTestContextAdapter) adapters.get(getCaller())).getBean(clazz);
-    }
-
-    private String getCaller() {
-        return new Throwable().getStackTrace()[2].getMethodName();
+        for (StackTraceElement element : new Throwable().getStackTrace()) {
+            if (adapters.containsKey(element.getMethodName())) {
+                return ((BllUnitTestContextAdapter) adapters.get(element.getMethodName())).getBean(clazz);
+            }
+        }
+        return null;
     }
 
     @Override
