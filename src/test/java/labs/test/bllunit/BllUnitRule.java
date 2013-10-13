@@ -3,6 +3,7 @@ package labs.test.bllunit;
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -22,7 +23,7 @@ public class BllUnitRule implements MethodRule {
     public <T> T getBean(Class<T> clazz) {
         if (!adapters.containsKey(getCaller())) return null;
 
-        return (T) adapters.get(getCaller()).getConfigContext().getBean(clazz);
+        return ((BllUnitTestContextAdapter) adapters.get(getCaller())).getBean(clazz);
     }
 
     private String getCaller() {

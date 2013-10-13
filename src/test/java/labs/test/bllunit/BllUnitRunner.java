@@ -2,11 +2,10 @@ package labs.test.bllunit;
 
 import labs.test.bllunit.annotation.BllAfter;
 import labs.test.bllunit.annotation.BllBefore;
-import labs.test.models.Person;
-import labs.test.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.AnnotationAttributes;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.Assert;
 
@@ -51,21 +50,11 @@ class BllUnitRunner {
     private void beforeOrAfter(BllUnitTestContext testContext, boolean isSetup,
                                Collection<AnnotationAttributes> annotations) throws Exception {
         for (AnnotationAttributes annotation : annotations) {
-            for (Class<?> value : annotation.getConfig()) {
-                //testContext.getEntities().put(Class.forName(value), Class.forName(value).newInstance());
-                testContext.getConfigContext().register(value);
+            testContext.getConfigContext(ClassPathXmlApplicationContext.class).setConfigLocations(annotation.getXml());
+            for (Class<?> config : annotation.getConfig()) {
+                testContext.getConfigContext(AnnotationConfigApplicationContext.class).register(config);
             }
         }
-//        testContext.getEntities().put(Person.class, new Person() {{
-//            setId(618);
-//            setName("demo person");
-//            setType("test");
-//        }});
-//        testContext.getEntities().put(User.class, new User() {{
-//            setId(1900);
-//            setName("demo user");
-//            setComment("test");
-//        }});
     }
 
     private <T extends Annotation> Collection<T> getAnnotations(BllUnitTestContext testContext, Class<T> annotationType) {
@@ -83,19 +72,31 @@ class BllUnitRunner {
 
     private static class AnnotationAttributes {
 
-        private String[] value;
+        private String[] xml;
+        private String[] json;
+        private String[] ini;
         private Class<?>[] config;
 
         public AnnotationAttributes(Annotation annotation) {
             Assert.state((annotation instanceof BllBefore) || (annotation instanceof BllAfter),
                     "Only BllBefore and BllAfter annotations are supported");
             Map<String, Object> attributes = AnnotationUtils.getAnnotationAttributes(annotation);
-            this.value = (String[]) attributes.get("value");
+            this.xml = (String[]) attributes.get("xml");
+            this.json = (String[]) attributes.get("json");
+            this.ini = (String[]) attributes.get("ini");
             this.config = (Class<?>[]) attributes.get("config");
         }
 
-        public String[] getValue() {
-            return this.value;
+        public String[] getXml() {
+            return this.xml;
+        }
+
+        public String[] getjson() {
+            return this.json;
+        }
+
+        public String[] getIni() {
+            return this.ini;
         }
 
         public Class<?>[] getConfig() {

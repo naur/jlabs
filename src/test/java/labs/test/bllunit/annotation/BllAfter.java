@@ -10,5 +10,11 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface BllAfter {
-    String[] value() default "";
+    String[] xml() default {};
+
+    String[] json() default {};
+
+    String[] ini() default {};
+
+    Class<?>[] config() default {};
 }

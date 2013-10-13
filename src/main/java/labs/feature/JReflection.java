@@ -21,6 +21,12 @@ public class JReflection extends Sub {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigDemoTestContext.class);
         User user = ctx.getBean(User.class);
         logger.info(user.toString());
+
+        user.setId(-100618);
+        logger.info(user.toString());
+
+        user = ctx.getBean(User.class);
+        logger.info(user.toString());
     }
 
     private StackTraceElement getCaller() {
