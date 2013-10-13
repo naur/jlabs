@@ -54,11 +54,14 @@ class BllUnitRunner {
         for (AnnotationAttributes annotation : annotations) {
             str.addAll(Arrays.asList(annotation.getXml()));
             //register BllBefore.config 指定的 Configuration
-            testContext.getConfigContext(AnnotationConfigApplicationContext.class).register(annotation.getConfig());
-            testContext.getConfigContext(AnnotationConfigApplicationContext.class).refresh();
+            if (annotation.getConfig().length > 0) {
+                testContext.getConfigContext(AnnotationConfigApplicationContext.class).register(annotation.getConfig());
+                testContext.getConfigContext(AnnotationConfigApplicationContext.class).refresh();
+            }
         }
         //register BllBefore.xml 指定的 Configuration
-        testContext.getConfigContext(ClassPathXmlApplicationContext.class).setConfigLocations(str.toArray(new String[0]));
+        if (!str.isEmpty())
+            testContext.getConfigContext(ClassPathXmlApplicationContext.class).setConfigLocations(str.toArray(new String[0]));
     }
 
     /**

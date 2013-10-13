@@ -5,6 +5,7 @@ import labs.entities.User;
 import labs.test.bllunit.BllUnitRule;
 import labs.test.bllunit.annotation.BllBefore;
 import labs.test.dataset.BllDemoTestContext;
+import labs.test.dataset.BllDemoTestContextPerson;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,8 +33,8 @@ public class BllDemoTest extends UnitTestBase {
 
     @Test
     @BllBefore(
-            config = {labs.test.dataset.BllDemoTestContext.class},
-            xml = {"classpath:dataset/demo.xml"}
+            config = {BllDemoTestContextPerson.class},
+            xml = {"classpath:dataset/demo-user.xml"}
     )
     public void testConfigAndXml() {
         beanTest();
