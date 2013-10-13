@@ -42,14 +42,18 @@ class BllUnitRunner {
                 }
             }
         } finally {
+            if (testContext.getTestException() != null) {
+                logger.error("BllUnitTestException", new Exception(testContext.getTestException()));
+            }
         }
     }
 
     private void beforeOrAfter(BllUnitTestContext testContext, boolean isSetup,
                                Collection<AnnotationAttributes> annotations) throws Exception {
         for (AnnotationAttributes annotation : annotations) {
-            for (String value : annotation.getValue()) {
-                testContext.getEntities().put(Class.forName(value), Class.forName(value).newInstance());
+            for (Class<?> value : annotation.getConfig()) {
+                //testContext.getEntities().put(Class.forName(value), Class.forName(value).newInstance());
+                testContext.getConfigContext().register(value);
             }
         }
 //        testContext.getEntities().put(Person.class, new Person() {{
@@ -80,16 +84,22 @@ class BllUnitRunner {
     private static class AnnotationAttributes {
 
         private String[] value;
+        private Class<?>[] config;
 
         public AnnotationAttributes(Annotation annotation) {
             Assert.state((annotation instanceof BllBefore) || (annotation instanceof BllAfter),
                     "Only BllBefore and BllAfter annotations are supported");
             Map<String, Object> attributes = AnnotationUtils.getAnnotationAttributes(annotation);
             this.value = (String[]) attributes.get("value");
+            this.config = (Class<?>[]) attributes.get("config");
         }
 
         public String[] getValue() {
             return this.value;
+        }
+
+        public Class<?>[] getConfig() {
+            return this.config;
         }
 
         public static <T extends Annotation> Collection<AnnotationAttributes> get(Collection<T> annotations) {

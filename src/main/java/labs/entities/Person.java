@@ -1,4 +1,4 @@
-package labs.test.models;
+package labs.entities;
 
 /**
  * Created by Administrator on 9/12/13.
@@ -38,8 +38,8 @@ public class Person {
         this.type = type;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Person: id=" + id + ", name=" + name + ", type=" + type;
-//    }
+    @Override
+    public String toString() {
+        return "Person: id=" + id + ", name=" + name + ", type=" + type;
+    }
 }

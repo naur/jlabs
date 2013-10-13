@@ -3,6 +3,8 @@ package labs.test.bllunit;
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -20,7 +22,7 @@ public class BllUnitRule implements MethodRule {
     public <T> T getBean(Class<T> clazz) {
         if (!adapters.containsKey(getCaller())) return null;
 
-        return (T) adapters.get(getCaller()).getEntities().get(clazz);
+        return (T) adapters.get(getCaller()).getConfigContext().getBean(clazz);
     }
 
     private String getCaller() {
@@ -32,41 +34,6 @@ public class BllUnitRule implements MethodRule {
         BllUnitTestContextAdapter adapter = new BllUnitTestContextAdapter(method, target);
         adapters.put(method.getName(), adapter);
         return new BllUnitStatement(adapter, base);
-    }
-
-    protected class BllUnitTestContextAdapter implements BllUnitTestContext {
-
-        private FrameworkMethod method;
-        private Object target;
-        private Throwable testException;
-        private Map<Class<?>, Object> entities;
-
-        public BllUnitTestContextAdapter(FrameworkMethod method, Object target) {
-            this.method = method;
-            this.target = target;
-            this.entities = new HashMap<Class<?>, Object>();
-        }
-
-        public Class<?> getTestClass() {
-            return this.target.getClass();
-        }
-
-        public Method getTestMethod() {
-            return this.method.getMethod();
-        }
-
-        public Throwable getTestException() {
-            return this.testException;
-        }
-
-        @Override
-        public Map<Class<?>, Object> getEntities() {
-            return this.entities;
-        }
-
-        public void setTestException(Throwable e) {
-            this.testException = e;
-        }
     }
 
     private class BllUnitStatement extends Statement {

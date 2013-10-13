@@ -1,5 +1,9 @@
 package labs;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.NestedExceptionUtils;
+
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,6 +17,8 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Application {
+
+    private final static Logger logger = LoggerFactory.getLogger(Application.class);
 
     private static String[] packageNames = new String[]{
             "labs.feature",
@@ -41,11 +47,11 @@ public class Application {
                 sub = (Sub) cla.newInstance();
                 sub.execute();
             } catch (Exception ex) {
-                System.out.println(ex);
+                logger.error("ERROR", ex);
             }
         }
 
-        System.out.println("___________complete___________");
+        logger.debug("___________complete___________");
         //System.exit(0);
     }
 

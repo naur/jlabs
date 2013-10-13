@@ -1,5 +1,8 @@
 package labs.test.bllunit;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.lang.reflect.Method;
 import java.util.Map;
 
@@ -13,5 +16,5 @@ public interface BllUnitTestContext {
 
     Throwable getTestException();
 
-    Map<Class<?>, Object> getEntities();
+    AnnotationConfigApplicationContext getConfigContext();
 }

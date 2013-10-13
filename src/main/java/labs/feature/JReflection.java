@@ -2,22 +2,25 @@ package labs.feature;
 
 import labs.Enable;
 import labs.Sub;
-import org.springframework.util.ReflectionUtils;
-import sun.reflect.Reflection;
-
-import java.util.logging.LogRecord;
+import labs.entities.User;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * Created by Administrator on 9/12/13.
  */
-@Enable(false)
+@Enable(true)
 public class JReflection extends Sub {
     @Override
     public void execute() throws Exception {
+        logger.debug(format(1, "Java Reflection."));
         //ReflectionUtils
 
-        System.out.print("Reflection.getCallerClass(): " + Reflection.getCallerClass());
+        //logger.debug("Reflection.getCallerClass(): " + Reflection.getCallerClass());
 
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigDemoTestContext.class);
+        User user = ctx.getBean(User.class);
+        logger.info(user.toString());
     }
 
     private StackTraceElement getCaller() {
@@ -29,7 +32,7 @@ public class JReflection extends Sub {
 //        StackTraceElement stack[] = Thread.currentThread().getStackTrace(); //equals: new Throwable().getStackTrace()
 //        for (StackTraceElement element : stack) {
 //            if ((element.getClassName().indexOf("T1")) != -1) {
-//                System.out.println("called by " + element.getClassName() + "." + element.getMethodName() + "/" + element.getFileName());
+//                logger.debug("called by " + element.getClassName() + "." + element.getMethodName() + "/" + element.getFileName());
 //            }
 //        }
 

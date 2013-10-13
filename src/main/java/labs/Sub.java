@@ -1,5 +1,8 @@
 package labs;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.text.MessageFormat;
 import java.util.HashMap;
 
@@ -11,6 +14,9 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class Sub {
+
+    protected final static Logger logger = LoggerFactory.getLogger(Sub.class);
+
     public abstract void execute() throws Exception;
 
     protected String format(Object... msg) {
