@@ -29,7 +29,7 @@ public class JRrd extends Sub {
 
         rrdDef.exportXmlTemplate(rrdPath + rrdName + "_template.xml");
 
-        System.out.println("[RrdDef Template  export xml success]");
+        logger.info("[RrdDef Template  export xml success]");
 
 
         RrdDbPool pool = RrdDbPool.getInstance();

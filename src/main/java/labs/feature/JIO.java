@@ -27,7 +27,7 @@ public class JIO extends Sub {
         ByteBuffer buffer = ByteBuffer.allocate(32);
         CharBuffer charBuffer = buffer.asCharBuffer();
         String content = charBuffer.put("Hello ").put("World").flip().toString();
-        System.out.println(format(
+        logger.info(format(
                 "flip", content,
                 "position", buffer.position()));
 
@@ -35,7 +35,7 @@ public class JIO extends Sub {
         ByteBuffer buffer1 = ByteBuffer.allocate(32);
         CharBuffer charBuffer1 = buffer1.asCharBuffer();
         String content1 = charBuffer1.put("Hello ").put("World").toString();
-        System.out.println(format(
+        logger.info(format(
                 "noflip", content,
                 "position", buffer.position()));
 

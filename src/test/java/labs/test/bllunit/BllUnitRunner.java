@@ -50,7 +50,7 @@ class BllUnitRunner {
      */
     private void beforeOrAfter(BllUnitTestContext testContext, boolean isSetup,
                                Collection<AnnotationAttributes> annotations) throws Exception {
-        List<String> str = new ArrayList<>();
+        List<String> str = new ArrayList<String>();
         for (AnnotationAttributes annotation : annotations) {
             str.addAll(Arrays.asList(annotation.getXml()));
             //register BllBefore.config 指定的 Configuration

@@ -26,8 +26,8 @@ public class JInterrupt extends Sub {
         Thread thread = new Thread() {
             public void run() {
                 try {
-                    System.out.println(sort(array));
-                    System.out.println(array.toString());
+                    logger.info(String.valueOf(sort(array)));
+                    logger.info(array.toString());
                 } catch (Error err) {
                     err.printStackTrace();
                 }
@@ -36,9 +36,9 @@ public class JInterrupt extends Sub {
 
         thread.start();
         //TimeUnit.SECONDS.sleep(1);
-        System.out.println("go to stop thread");
+        logger.info("go to stop thread");
         thread.interrupt();
-        System.out.println("finish main");
+        logger.info("finish main");
     }
 
     private int sort(int[] array) {
@@ -49,7 +49,7 @@ public class JInterrupt extends Sub {
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
                 }
-                System.out.println(String.valueOf(i) + "-" + String.valueOf(j));
+                logger.info(String.valueOf(i) + "-" + String.valueOf(j));
             }
         }
         return array[0];

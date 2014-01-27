@@ -1,10 +1,14 @@
 package labs.concurrency.stampedlock;
 
+import labs.Enable;
+import labs.Sub;
+
 import java.util.Arrays;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class PerfTest {
+@Enable(false)
+public class PerfTest extends Sub {
     private static final long TEST_COOL_OFF_MS = 1000;
     private static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
 
@@ -21,13 +25,19 @@ public class PerfTest {
     private static int NUM_READERS;
     private static long TEST_DURATION_MS;
 
+
+    @Override
+    public void execute() throws Exception {
+        PerfTest.main(new String[]{"100", "100", "100"});
+    }
+
     public static void main(final String[] args) throws Exception {
         NUM_READERS = Integer.parseInt(args[0]);
         NUM_WRITERS = Integer.parseInt(args[1]);
         TEST_DURATION_MS = Long.parseLong(args[2]);
 
         for (int i = 0; i < 5; i++) {
-            System.out.println("*** Run - " + i);
+            logger.info("*** Run - " + i);
             for (final Spaceship SPACESHIP : SPACESHIPS) {
                 System.gc();
                 Thread.sleep(TEST_COOL_OFF_MS);

@@ -83,6 +83,7 @@ public class FileUtil {
     }
 
     /**
+     * 获取目录下所有文件
      *
      * @param directory
      * @param traverse
@@ -98,7 +99,7 @@ public class FileUtil {
         File[] files = dir.listFiles();
         for (File file : files) {
             if (file.isDirectory() && traverse.length > 0 && traverse[0]) {
-                result.addAll(FileUtil.getFiles(file.getPath()), traverse);
+                result.addAll(FileUtil.getFiles(file.getPath(), traverse));
             } else {
                 result.add(file);
             }
@@ -107,6 +108,13 @@ public class FileUtil {
         return result;
     }
 
+    /**
+     * 获取目录下所有文件
+     *
+     * @param directory
+     * @param selector
+     * @return
+     */
     public static List<String> getFiles(String directory, Func<File, String>... selector) {
         List<String> result = new ArrayList<String>();
         File dir = new File(directory);
@@ -117,9 +125,10 @@ public class FileUtil {
         File[] files = dir.listFiles();
         for (File file : files) {
             if (file.isDirectory()) {
-                result.addAll(FileUtil.getFiles(file.getPath()));
+                result.addAll(FileUtil.getFiles(file.getPath(), selector));
             } else {
-                result.add(file);
+                String temp = selector.length == 0 ? file.getPath() : selector[0].execute(file);
+                if (null != temp) result.add(temp);
             }
         }
 

@@ -31,12 +31,17 @@ public class Application {
     public static void main(String[] args) throws Exception {
         classLoader = Thread.currentThread().getContextClassLoader();
 
-        //file:/D:/Research/projects/jlabs/target/classes/
-        final String classPath = classLoader.getResource("").getPath();
+        //substring(1): 排除开始的 [/] 字符    --       [file:/D:/Research/projects/jlabs/target/classes/]
+        final String classPath = classLoader.getResource("").getPath().replace("/", "\\").substring(1);
         List<String> classNames = FileUtil.getFiles(classPath, new Func<File, String>() {
             @Override
             public String execute(File file) {
-                return file.getPath().replace(classPath, "").replace("\\", ".") + ".class";
+                if (!".class".equals(FileUtil.fileType(file.getPath()))) return null;
+                if ("Application.class".equals(FileUtil.fileType(file.getPath()))) return null;
+                if ("Sub.class".equals(FileUtil.fileType(file.getPath()))) return null;
+
+                //去掉 .class，格式化为[labs.feature.JLoad]
+                return file.getPath().replace(".class", "").replace(classPath, "").replace("\\", ".");
             }
         });
         List<Class> classes = IteratorUtil.select(classNames, loadClass);
@@ -58,45 +63,21 @@ public class Application {
     private static Func<String, Class> loadClass = new Func<String, Class>() {
         @Override
         public Class execute(String className) {
-            Enable enable = null;
-            if (!className.contains("Application") && !className.contains("Sub")) {
-
-                try {
-                    Class clazz = classLoader.loadClass(className);
-                    if (Sub.class.isAssignableFrom(clazz) && null != clazz.getAnnotation(Enable.class) && ((Enable) clazz.getAnnotation(Enable.class)).value()) {
-                        enable = clazz.getMethod("execute").getAnnotation(Enable.class);
-                        if (null == enable || enable.value()) {
-                            return clazz;
-                        }
+            try {
+                //example: [labs.feature.JLoad]
+                Class clazz = classLoader.loadClass(className);
+                if (Sub.class.isAssignableFrom(clazz) && null != clazz.getAnnotation(Enable.class) && ((Enable) clazz.getAnnotation(Enable.class)).value()) {
+                    Enable enable = clazz.getMethod("execute").getAnnotation(Enable.class);
+                    if (null == enable || enable.value()) {
+                        return clazz;
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return null;
         }
     };
 
     private static ClassLoader classLoader;
-
-//    private static List<Class> loadPackage(String packageName, ClassLoader classLoader) throws ClassNotFoundException, NoSuchMethodException {
-//        List<Class> classes = new ArrayList<Class>();
-//        Class clazz = null;
-//        Enable enable = null;
-//        File directory = new File(classLoader.getResource(packageName.replace(".", "/")).getPath());
-//        if (directory.isDirectory()) {
-//            for (String file : directory.list()) {
-//                if (!file.contains("Application") && !file.contains("Sub")) {
-//                    clazz = classLoader.loadClass(packageName + "." + file.replace(".class", ""));
-//                    if (Sub.class.isAssignableFrom(clazz) && null != clazz.getAnnotation(Enable.class) && ((Enable) clazz.getAnnotation(Enable.class)).value()) {
-//                        enable = clazz.getMethod("execute").getAnnotation(Enable.class);
-//                        if (null == enable || enable.value()) {
-//                            classes.add(clazz);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return classes;
-//    }
 }

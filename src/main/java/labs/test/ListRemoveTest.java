@@ -25,7 +25,7 @@ import java.util.List;
 public class ListRemoveTest extends Sub {
     @Override
     public void execute() throws Exception {
-        List<Entity> list = new ArrayList<>();
+        List<Entity> list = new ArrayList<Entity>();
         for (int i = 1; i < 10; i++) {
             list.add(new Entity(i, "entity:" + i));
         }

@@ -30,16 +30,16 @@ public class JLoad extends Sub {
      */
     @Override
     public void execute() throws Exception {
-        System.out.println(format(1, "Java Loader Tree."));
+        logger.info(format(1, "Java Loader Tree."));
         //ClassLoaderTree
         ClassLoader loader = JLoad.class.getClassLoader();
         while (loader != null) {
-            System.out.println(loader.toString());
+            logger.info(loader.toString());
             loader = loader.getParent();
         }
 
         //TODO Class.forName (http://www.cnblogs.com/wjkaola123/archive/2009/11/23/1609119.html)
-        System.out.println(format(1, "End"));
+        logger.info(format(1, "End"));
     }
 
 
