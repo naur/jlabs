@@ -2,10 +2,8 @@ package labs;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.NestedExceptionUtils;
 
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +18,7 @@ public class Application {
 
     private final static Logger logger = LoggerFactory.getLogger(Application.class);
 
-    private static String[] packageNames = new String[]{
-            "labs.feature",
-            "labs.algorithms",
-            "labs.nosql",
-            "labs.database"
-    };
+    private static String[] packageNames = PropertiesUtils.getProperty("packageNames").split(",");
 
     /**
      * 加载 labs 里的 class
