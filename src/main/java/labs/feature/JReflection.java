@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 /**
  * Created by Administrator on 9/12/13.
  */
-@Enable(true)
+@Enable(false)
 public class JReflection extends Sub {
     @Override
     public void execute() throws Exception {
