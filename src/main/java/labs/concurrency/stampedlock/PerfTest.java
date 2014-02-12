@@ -53,11 +53,13 @@ public class PerfTest {
             EXECUTOR.execute(new ReaderRunner(i, results, spaceship, runningFlag, startBarrier, finishLatch));
         }
 
+        //等待所有 READER 和 WRITER 线程都到达后，再一起执行。
         awaitBarrier(startBarrier);
 
         Thread.sleep(TEST_DURATION_MS);
         runningFlag.set(false);
 
+        //等待所有 READER 和 WRITER 线程都执行完后，在执行下面的代码。
         finishLatch.await();
 
         System.out.format("%d readers %d writers %22s %s\n",

@@ -4,6 +4,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ReentrantLockSpaceship implements Spaceship {
+
+    //ReentrantLock 可以认为是 synchronized 的替代
     private final Lock lock = new ReentrantLock();
 
     private int x;
