@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 一致 hash 算法
  * Created with IntelliJ IDEA.
  * User: jiaruizhi
  * Date: 13-4-27
