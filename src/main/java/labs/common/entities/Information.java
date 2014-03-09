@@ -1,7 +1,7 @@
 package labs.common.entities;
 
-import org.naure.common.patterns.Enumerable;
-import org.naure.common.patterns.Func;
+import labs.common.util.EnumerableUtils;
+import labs.common.patterns.Func;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,7 +67,7 @@ public class Information<T> { //implements Serializable
         }
 
         if (this.getData() instanceof List) {
-            return Enumerable.contains((List<Information>) this.getData(), new Func<Information, Boolean>() {
+            return EnumerableUtils.contains((List<Information>) this.getData(), new Func<Information, Boolean>() {
                 @Override
                 public Boolean execute(Information information) {
                     if (null == information) {
@@ -91,7 +91,7 @@ public class Information<T> { //implements Serializable
         List<String> keys = new ArrayList<String>();
         keys.add(this.keywords);
         if (this.getData() instanceof List) {
-            keys.addAll(Enumerable.select((List) this.getData(), new Func<Object, String>() {
+            keys.addAll(EnumerableUtils.select((List) this.getData(), new Func<Object, String>() {
                 @Override
                 public String execute(Object information) {
                     if (null == information || !(information instanceof Information)) {
