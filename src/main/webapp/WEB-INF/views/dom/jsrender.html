@@ -21,9 +21,7 @@
         };
 
         function movie() {
-            $.getScript("/templates/templates.js", function () {
-                $("#movieList").html($.render.movie(global.data.movies));
-            });
+            $("#movieList").html($.render.movie(global.data.movies));
         }
 
         function person() {
@@ -33,7 +31,7 @@
             });
         }
 
-        require(["jquery", "jquery.template"], function ($) {
+        require(['labs-template'], function () {
             $(function () {
                 movie();
                 person();

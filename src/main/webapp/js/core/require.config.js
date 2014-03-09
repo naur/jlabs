@@ -19,6 +19,12 @@ require.config({
         'jquery.strings': jslocalpath + '/js/core/jquery.strings',
         'jquery.validate': jslocalpath + '/js/core/jquery.validate.min',
         'jquery.template': jslocalpath + '/js/core/jsrender.min',
-        'jlab': jslocalpath + '/js/core/jlab'
+        'jlab': jslocalpath + '/js/core/jlab',
+
+        'labs-template': '/templates/labs-template'
+    },
+
+    shim: {
+        'labs-template': ['jquery', 'jquery.template']
     }
 });
