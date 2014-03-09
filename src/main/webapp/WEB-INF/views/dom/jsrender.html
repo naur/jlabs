@@ -2,8 +2,36 @@
 <html>
 <head>
     <title> DEMO: jsrender </title>
+    <script type="text/javascript" src="/js/core/require.js"></script>
+    <script type="text/javascript" src="/js/core/require.config.js"></script>
+
+    <script id="movieTemplate" type="text/x-jsrender">
+	<div>
+		{{:#index+1}}: <b>{{>name}}</b> ({{>releaseYear}})
+	</div>
+    </script>
+
+    <script type="text/javascript">
+        function demo() {
+            var movies = [
+                { name: "The Red Violin", releaseYear: "1998" },
+                { name: "Eyes Wide Shut", releaseYear: "1999" },
+                { name: "The Inheritance", releaseYear: "1976" }
+            ];
+
+            $("#movieList").html($("#movieTemplate").render(movies));
+        }
+
+        require(["jquery", "jquery.template"], function ($) {
+            $(function () {
+                demo();
+            });
+        });
+    </script>
 </head>
 <body>
+
+<div id="movieList"></div>
 
 </body>
 </html>
