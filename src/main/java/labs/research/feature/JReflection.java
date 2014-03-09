@@ -2,7 +2,7 @@ package labs.research.feature;
 
 import labs.research.Enable;
 import labs.research.Sub;
-import labs.entities.User;
+import labs.common.entities.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

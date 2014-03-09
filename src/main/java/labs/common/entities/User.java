@@ -1,4 +1,4 @@
-package labs.entities;
+package labs.common.entities;
 
 /**
  * Created by Administrator on 9/12/13.

@@ -3,11 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="labs.entities.Person">
+    <bean class="labs.common.entities.Person">
         <property name="id" value="1983" />
         <property name="name" value="xml person" />
     </bean>
-    <bean  class="labs.entities.User">
+    <bean  class="labs.common.entities.User">
         <property name="id" value="1984" />
         <property name="name" value="xml user" />
     </bean>

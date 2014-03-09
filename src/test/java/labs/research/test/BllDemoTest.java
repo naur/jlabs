@@ -1,7 +1,7 @@
 package labs.research.test;
 
-import labs.entities.Person;
-import labs.entities.User;
+import labs.common.entities.Person;
+import labs.common.entities.User;
 import labs.research.test.bllunit.BllUnitRule;
 import labs.research.test.bllunit.annotation.BllBefore;
 import labs.research.test.dataset.BllDemoTestContextPerson;

@@ -1,6 +1,6 @@
 package labs.research.test.dataset;
 
-import labs.entities.Person;
+import labs.common.entities.Person;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
