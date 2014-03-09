@@ -33,6 +33,11 @@ public class JsController extends ControllerBase {
 
     @RequestMapping()
     public String view() {
-        return "upload";
+        return "view";
+    }
+
+    @RequestMapping("jsrender")
+    public String jsrender() {
+        return "jsrender";
     }
 }
