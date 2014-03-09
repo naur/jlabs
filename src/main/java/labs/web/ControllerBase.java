@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public abstract class ControllerBase {
 
-    public String view(String name) {
+    protected String view(String name) {
         return viewPath + "/" + name;
     }
 
