@@ -4,27 +4,39 @@
     <title> DEMO: jsrender </title>
     <script type="text/javascript" src="/js/core/require.js"></script>
     <script type="text/javascript" src="/js/core/require.config.js"></script>
-
-    <script id="movieTemplate" type="text/x-jsrender">
-	<div>
-		{{:#index+1}}: <b>{{>name}}</b> ({{>releaseYear}})
-	</div>
-    </script>
-
     <script type="text/javascript">
-        function demo() {
-            var movies = [
-                { name: "The Red Violin", releaseYear: "1998" },
-                { name: "Eyes Wide Shut", releaseYear: "1999" },
-                { name: "The Inheritance", releaseYear: "1976" }
-            ];
+        var global = {
+            data: {
+                movies: [
+                    { name: "The Red Violin", releaseYear: "1998" },
+                    { name: "Eyes Wide Shut", releaseYear: "1999" },
+                    { name: "The Inheritance", releaseYear: "1976" }
+                ],
+                people: [
+                    { name: "Adriana" },
+                    { name: "Robert" }
+                ]
+            },
+            template: {}
+        };
 
-            $("#movieList").html($("#movieTemplate").render(movies));
+        function movie() {
+            $.getScript("/templates/templates.js", function () {
+                $("#movieList").html($.render.movie(global.data.movies));
+            });
+        }
+
+        function person() {
+            $.get("/templates/person.html", function (value) {
+                global.template.person = $.templates(value);
+                $("#peopleList").html(global.template.person.render(global.data.people));
+            });
         }
 
         require(["jquery", "jquery.template"], function ($) {
             $(function () {
-                demo();
+                movie();
+                person();
             });
         });
     </script>
@@ -32,6 +44,8 @@
 <body>
 
 <div id="movieList"></div>
+<hr/>
+<div id="peopleList"></div>
 
 </body>
 </html>
