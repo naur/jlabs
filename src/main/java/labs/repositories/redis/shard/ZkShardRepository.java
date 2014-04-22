@@ -3,14 +3,12 @@
  */
 package labs.repositories.redis.shard;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
-
+import labs.repositories.common.util.JsonUtil;
+import labs.repositories.zk.ChildrenNodeChangedListener;
+import labs.repositories.zk.ZkClient;
+import labs.repositories.zk.ZkSerializer;
+import labs.repositories.zk.election.ElectionListener;
+import labs.repositories.zk.election.LeaderElection;
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
@@ -18,12 +16,13 @@ import org.apache.zookeeper.KeeperException.BadVersionException;
 import org.apache.zookeeper.Watcher.Event.EventType;
 import org.apache.zookeeper.data.Stat;
 
-import labs.repositories.common.util.JsonUtil;
-import labs.repositories.zk.ChildrenNodeChangedListener;
-import labs.repositories.zk.ZkClient;
-import labs.repositories.zk.ZkSerializer;
-import labs.repositories.zk.election.ElectionListener;
-import labs.repositories.zk.election.LeaderElection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 负责所有shard及其节点的初始化、变更持久 接受heartbeat的通知，接受本组件内部和客户注册监听器，用以记录shard节点变更事件

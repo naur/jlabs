@@ -1,16 +1,15 @@
 package labs.repositories.zk.election;
 
+import labs.repositories.zk.ChildrenChangedListener;
+import labs.repositories.zk.SessionListener;
+import labs.repositories.zk.ZkClient;
+import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.KeeperException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
-
-import org.apache.zookeeper.CreateMode;
-import org.apache.zookeeper.KeeperException;
-
-import labs.repositories.zk.ChildrenChangedListener;
-import labs.repositories.zk.SessionListener;
-import labs.repositories.zk.ZkClient;
 
 /**
  * Dynamic leader election based on zookeeper's EPHEMERAL_SEQUENTIAL node.
